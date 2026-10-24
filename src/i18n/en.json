@@ -1,0 +1,35 @@
+{
+  "a11y": {
+    "skipToContent": "Skip to main content"
+  },
+  "common": {
+    "search": "Search",
+    "close": "Close"
+  },
+  "nav": {
+    "label": "Main navigation",
+    "home": "Home",
+    "tools": "All Tools",
+    "workspace": "Workspace (JSON Formatter)",
+    "about": "About"
+  },
+  "header": {
+    "quickFind": "Quick Find",
+    "quickFindTitle": "Quick Find",
+    "quickFindLabel": "Search utilities",
+    "quickFindPlaceholder": "Search utilities (e.g. JSON, Regex, UUID, Epoch, Base64)…",
+    "github": "GitHub",
+    "githubLabel": "Open the project repository on GitHub"
+  },
+  "footer": {
+    "status": "All systems operational",
+    "latency": "0.2ms local execution",
+    "brand": "DevTools Suite",
+    "license": "MIT Open Source"
+  },
+  "lang": {
+    "label": "Language",
+    "en": "EN",
+    "uk": "UK"
+  }
+}

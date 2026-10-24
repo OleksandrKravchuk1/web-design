@@ -1,0 +1,25 @@
+<%#
+  Підвал сайту: статус, авторські права, перемикач мови EN / UK (?lang=…).
+  Без JavaScript сторінки повністю працюють англійською.
+%>
+<footer class="dt-footer">
+  <p class="dt-footer__status">
+    <span data-i18n="footer.status"><%= t("footer.status") %></span>
+    <span data-i18n="footer.latency"><%= t("footer.latency") %></span>
+  </p>
+
+  <nav class="dt-footer__lang" aria-label="<%= t("lang.label") %>" data-i18n-attr="aria-label:lang.label">
+    <ul class="dt-footer__lang-list">
+      <li><a class="dt-footer__lang-link" href="?lang=en" hreflang="en" lang="en" data-i18n="lang.en"><%= t("lang.en") %></a></li>
+      <li><a class="dt-footer__lang-link" href="?lang=uk" hreflang="uk" lang="uk" data-i18n="lang.uk"><%= t("lang.uk") %></a></li>
+    </ul>
+  </nav>
+
+  <p class="dt-footer__copy">
+    <small>
+      <span data-i18n="footer.brand"><%= t("footer.brand") %></span>
+      © <time datetime="<%= year %>"><%= year %></time> ·
+      <span data-i18n="footer.license"><%= t("footer.license") %></span>
+    </small>
+  </p>
+</footer>

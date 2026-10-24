@@ -1,0 +1,35 @@
+{
+  "a11y": {
+    "skipToContent": "Перейти до основного вмісту"
+  },
+  "common": {
+    "search": "Шукати",
+    "close": "Закрити"
+  },
+  "nav": {
+    "label": "Головна навігація",
+    "home": "Головна",
+    "tools": "Усі інструменти",
+    "workspace": "Робоча область (JSON Formatter)",
+    "about": "Про проєкт"
+  },
+  "header": {
+    "quickFind": "Швидкий пошук",
+    "quickFindTitle": "Швидкий пошук",
+    "quickFindLabel": "Пошук утиліт",
+    "quickFindPlaceholder": "Пошук утиліт (напр. JSON, Regex, UUID, Epoch, Base64)…",
+    "github": "GitHub",
+    "githubLabel": "Відкрити репозиторій проєкту на GitHub"
+  },
+  "footer": {
+    "status": "Усі системи працюють",
+    "latency": "0.2мс локального виконання",
+    "brand": "DevTools Suite",
+    "license": "Відкритий код MIT"
+  },
+  "lang": {
+    "label": "Мова",
+    "en": "EN",
+    "uk": "UK"
+  }
+}
