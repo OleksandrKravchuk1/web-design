@@ -58,10 +58,12 @@ function ejsPages() {
       order: "pre",
       handler(html, ctx) {
         const page = Object.keys(PAGES).find((key) => ctx.filename.endsWith(PAGES[key])) || "home";
-        return ejs.render(html, { ...templateData(), page }, {
+        const rendered = ejs.render(html, { ...templateData(), page }, {
           filename: ctx.filename,
           views: [TEMPLATES],
         });
+        // на місці тегів <% %> EJS лишає рядки з самими пробілами — прибираємо їх
+        return rendered.replace(/[ \t]+(?=\r?\n)/g, "");
       },
     },
     handleHotUpdate({ file, server }) {

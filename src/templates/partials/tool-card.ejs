@@ -1,0 +1,51 @@
+<%#
+  Картка інструменту (BEM-блок dt-tool-card) з мікророзміткою schema.org SoftwareApplication.
+  Параметри: tool, variant ('home' | 'catalog'), highlight (bool, акцентна кнопка), headingLevel (за замовчуванням 3).
+  Іконки з макета додаються в ЛР3 разом зі стилями.
+%>
+<%
+  const level = locals.headingLevel || 3;
+  const isHighlight = Boolean(locals.highlight);
+  const titleId = `tool-title-${tool.slug}`;
+  const description = variant === "home" ? tool.summary : tool.description;
+%>
+<article class="dt-tool-card dt-tool-card--<%= variant %><%= isHighlight ? " dt-tool-card--highlight" : "" %>" itemscope itemtype="https://schema.org/SoftwareApplication" aria-labelledby="<%= titleId %>">
+  <p class="dt-tool-card__category"><a class="dt-pill" href="./tools.html?category=<%= tool.category.slug %>"><%= tool.category.name %></a></p>
+  <h<%= level %> class="dt-tool-card__title" id="<%= titleId %>" itemprop="name"><%= tool.name %></h<%= level %>>
+  <p class="dt-tool-card__description" itemprop="description"><%= description %></p>
+
+  <% if (variant === "home") { %>
+  <ul class="dt-tool-card__tags">
+    <% tool.highlights.forEach((tag) => { %>
+    <li class="dt-tool-card__tag"><%= tag %></li>
+    <% }) %>
+  </ul>
+  <% } else { %>
+  <ul class="dt-tool-card__tags">
+    <% tool.badges.forEach((badge) => { %>
+    <li class="dt-tool-card__tag"><%= badge %></li>
+    <% }) %>
+    <li class="dt-tool-card__tag dt-tool-card__tag--trait"><%= tool.trait %></li>
+  </ul>
+  <% } %>
+
+  <footer class="dt-tool-card__footer">
+    <% if (variant === "home") { %>
+    <data class="dt-tool-card__status" value="<%= tool.status %>" data-i18n="tool.status.<%= tool.status %>"><%= t("tool.status." + tool.status) %></data>
+    <% } else { %>
+    <p class="dt-tool-card__note"><%= tool.note %></p>
+    <% } %>
+    <a class="dt-button <%= isHighlight ? "dt-button--accent" : "dt-button--secondary" %>" href="./<%= toolUrl(tool) %>" itemprop="url" aria-describedby="<%= titleId %>" data-i18n="tool.launch"><%= t("tool.launch") %></a>
+  </footer>
+
+  <meta itemprop="applicationCategory" content="DeveloperApplication">
+  <meta itemprop="operatingSystem" content="Any (web browser)">
+  <meta itemprop="softwareVersion" content="<%= tool.version %>">
+  <meta itemprop="datePublished" content="<%= tool.datePublished %>">
+  <meta itemprop="author" content="<%= site.author %>">
+  <link itemprop="license" href="https://opensource.org/licenses/MIT">
+  <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+    <meta itemprop="price" content="0">
+    <meta itemprop="priceCurrency" content="USD">
+  </span>
+</article>

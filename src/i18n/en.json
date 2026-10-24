@@ -1,4 +1,10 @@
 {
+  "meta": {
+    "home": {
+      "title": "DevTools Showcase — Developer Utilities in Your Browser",
+      "description": "Client-side micro-utilities for developers: JSON formatting, Base64, regex testing, JWT decoding and more. Zero tracking, instant execution."
+    }
+  },
   "a11y": {
     "skipToContent": "Skip to main content"
   },
@@ -31,5 +37,64 @@
     "label": "Language",
     "en": "EN",
     "uk": "UK"
+  },
+  "tool": {
+    "launch": "Launch",
+    "status": {
+      "active": "Active"
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "zero-latency micro-utilities for engineers",
+      "titleLead": "High-Performance Developer Utilities,",
+      "titleAccent": "Right in Your Browser",
+      "lead": "Client-side processing. Zero tracking. Instant execution for JSON formatting, Base64 encoding, regex testing, JWT decoding, and crypto utilities.",
+      "searchLabel": "Search utilities",
+      "searchPlaceholder": "Search utilities (e.g. JSON, Regex, UUID, Epoch, Base64)…",
+      "quickAccess": "Quick access:",
+      "explore": "Explore All Tools",
+      "workspace": "Quick Workspace"
+    },
+    "stats": {
+      "label": "Key figures",
+      "catalog": {
+        "label": "Available Catalog",
+        "value": "Micro-Tools",
+        "note": "Continuously updated"
+      },
+      "usage": {
+        "label": "Usage Volume",
+        "value": "Daily Execs",
+        "note": "Zero server logging"
+      },
+      "speed": {
+        "label": "Execution Speed",
+        "value": "Server Latency",
+        "note": "100% Client-side sandbox"
+      },
+      "license": {
+        "label": "License & Source",
+        "value": "Open Source",
+        "note": "MIT Licensed on GitHub"
+      }
+    },
+    "toolkit": {
+      "eyebrow": "Handcrafted Utilities",
+      "title": "Essential Developer Toolkit",
+      "lead": "High-frequency engineering tools optimized for raw speed and minimal distraction.",
+      "filterLabel": "Filter tools by category",
+      "all": "All"
+    },
+    "privacy": {
+      "eyebrow": "Zero-Knowledge Sandbox",
+      "title": "Your Data Never Leaves This Tab",
+      "text": "Every payload, auth token, and regex query runs directly through WebAssembly and standard JavaScript APIs in your local browser sandbox. Fully operational offline as a Progressive Web App.",
+      "noTelemetry": "No Telemetry Payload",
+      "offline": "Offline PWA Ready",
+      "wasm": "WebAssembly Engine",
+      "viewAll": "View All Utilities",
+      "architecture": "Security Architecture"
+    }
   }
 }
