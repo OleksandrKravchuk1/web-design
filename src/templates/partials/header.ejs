@@ -1,0 +1,45 @@
+<%#
+  Шапка сайту: skip-link, логотип і версія, головна навігація (aria-current для поточної сторінки),
+  Quick Find, який відкривається через Popover API (працює з клавіатури без JavaScript), посилання на GitHub.
+  Іконки з макета додаються в ЛР3 разом зі стилями.
+%>
+<%
+  const current = (name) => (page === name ? ' aria-current="page"' : "");
+%>
+<a class="dt-skip-link" href="#main" data-i18n="a11y.skipToContent"><%= t("a11y.skipToContent") %></a>
+<header class="dt-header">
+  <div class="dt-header__brand">
+    <a class="dt-header__logo" href="./index.html"><%= site.name %></a>
+    <data class="dt-header__version" value="<%= site.version %>">v<%= site.version %></data>
+  </div>
+
+  <nav class="dt-nav" aria-label="<%= t("nav.label") %>" data-i18n-attr="aria-label:nav.label">
+    <ul class="dt-nav__list">
+      <li class="dt-nav__item"><a class="dt-nav__link" href="./index.html"<%- current("home") %> data-i18n="nav.home"><%= t("nav.home") %></a></li>
+      <li class="dt-nav__item"><a class="dt-nav__link" href="./tools.html"<%- current("tools") %> data-i18n="nav.tools"><%= t("nav.tools") %></a></li>
+      <li class="dt-nav__item"><a class="dt-nav__link" href="./tool.html?tool=json-formatter"<%- current("tool") %> data-i18n="nav.workspace"><%= t("nav.workspace") %></a></li>
+      <li class="dt-nav__item"><a class="dt-nav__link" href="./about.html"<%- current("about") %> data-i18n="nav.about"><%= t("nav.about") %></a></li>
+    </ul>
+  </nav>
+
+  <div class="dt-header__actions">
+    <button class="dt-button dt-button--ghost dt-header__quick-find" type="button" popovertarget="quick-find" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">
+      <span data-i18n="header.quickFind"><%= t("header.quickFind") %></span>
+      <kbd>⌘</kbd><kbd>K</kbd>
+    </button>
+    <a class="dt-button dt-button--ghost dt-header__github" href="<%= site.repository %>" aria-label="<%= t("header.githubLabel") %>" data-i18n-attr="aria-label:header.githubLabel">
+      <span data-i18n="header.github"><%= t("header.github") %></span>
+      <data value="<%= site.stars %>">★ <%= site.stars %></data>
+    </a>
+  </div>
+
+  <div class="dt-quick-find" id="quick-find" popover role="dialog" aria-labelledby="quick-find-title">
+    <h2 class="dt-quick-find__title" id="quick-find-title" data-i18n="header.quickFindTitle"><%= t("header.quickFindTitle") %></h2>
+    <form class="dt-quick-find__form" role="search" action="./tools.html" method="get">
+      <label class="dt-quick-find__label" for="quick-find-input" data-i18n="header.quickFindLabel"><%= t("header.quickFindLabel") %></label>
+      <input class="dt-quick-find__input" id="quick-find-input" type="search" name="q" autocomplete="off" placeholder="<%= t("header.quickFindPlaceholder") %>" data-i18n-attr="placeholder:header.quickFindPlaceholder">
+      <button class="dt-button dt-button--accent" type="submit" data-i18n="common.search"><%= t("common.search") %></button>
+    </form>
+    <button class="dt-button dt-button--ghost" type="button" popovertarget="quick-find" popovertargetaction="hide" data-i18n="common.close"><%= t("common.close") %></button>
+  </div>
+</header>

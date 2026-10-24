@@ -368,47 +368,501 @@
   "t7_tools": [
     {
       "id": 1,
-      "name": "Regex Tester",
+      "slug": "json-formatter",
+      "name": "JSON Validator & Formatter",
+      "shortName": "JSON Formatter",
       "categoryId": 1,
-      "stars": 120,
-      "tags": [
-        "regex",
-        "testing"
-      ]
+      "icon": "data_object",
+      "summary": "Parse, validate, fix syntax, and beautify arbitrary JSON trees with zero latency.",
+      "description": "Validate, format with custom indentation, and minify complex JSON structures with line-by-line syntax diagnostics.",
+      "highlights": [
+        "Tree view",
+        "Minify",
+        "Diff"
+      ],
+      "badges": [
+        "0.2ms",
+        "RFC 8259"
+      ],
+      "trait": "WASM Core",
+      "note": "Offline Ready",
+      "status": "active",
+      "stars": 9800,
+      "version": "1.4.0",
+      "datePublished": "2024-01-15",
+      "featured": 1,
+      "quickAccess": 1
     },
     {
       "id": 2,
-      "name": "JSON Formatter",
+      "slug": "jwt-debugger",
+      "name": "JWT Token Debugger",
+      "shortName": "JWT Debugger",
+      "categoryId": 2,
+      "icon": "key",
+      "summary": "Inspect, decode payload, and verify HMAC-SHA256 signatures client-side.",
+      "description": "Decode the JWT header and payload, inspect claims and expiry, and verify HMAC-SHA256 signatures entirely client-side.",
+      "highlights": [
+        "Header",
+        "Payload",
+        "Verification"
+      ],
+      "badges": [
+        "0.1ms",
+        "RFC 7519"
+      ],
+      "trait": "HMAC-SHA256",
+      "note": "No Server Logs",
+      "status": "active",
+      "stars": 8600,
+      "version": "1.2.0",
+      "datePublished": "2024-02-20",
+      "featured": 2
+    },
+    {
+      "id": 3,
+      "slug": "regex-tester",
+      "name": "Regex Pattern Tester",
+      "shortName": "Regex Sandbox",
+      "categoryId": 3,
+      "icon": "regular_expression",
+      "summary": "Real-time PCRE and JavaScript regular expression sandbox with match group highlighting.",
+      "description": "Test PCRE and JavaScript regular expressions in real time with match group highlighting, flag toggles and a built-in cheatsheet.",
+      "highlights": [
+        "Cheatsheet",
+        "Flags",
+        "Benchmarks"
+      ],
+      "badges": [
+        "0.3ms",
+        "ECMA-262"
+      ],
+      "trait": "Match Groups",
+      "note": "Real-time Matching",
+      "status": "active",
+      "stars": 8100,
+      "version": "2.0.1",
+      "datePublished": "2024-03-05",
+      "featured": 3,
+      "quickAccess": 4
+    },
+    {
+      "id": 4,
+      "slug": "uuid-generator",
+      "name": "UUID v4 & v7 Generator",
+      "shortName": "UUID Generator",
+      "categoryId": 4,
+      "icon": "fingerprint",
+      "summary": "Bulk cryptographic identifier generation with custom batch sizes and timestamp sorting.",
+      "description": "Generate cryptographically random UUIDs in single or bulk batches with customizable prefix and uppercase options.",
+      "highlights": [
+        "v4, v7",
+        "Nil",
+        "Hyphens"
+      ],
+      "badges": [
+        "0.05ms",
+        "crypto.random"
+      ],
+      "trait": "Bulk Export",
+      "note": "Zero Entropy Leak",
+      "status": "active",
+      "stars": 7400,
+      "version": "1.1.0",
+      "datePublished": "2024-04-11",
+      "featured": 4,
+      "quickAccess": 5
+    },
+    {
+      "id": 5,
+      "slug": "base64",
+      "name": "Base64 Encoder / Decoder",
+      "shortName": "Base64 Encoder",
+      "categoryId": 2,
+      "icon": "code_blocks",
+      "summary": "Bidirectional ASCII, UTF-8, and binary stream conversion with URL-safe variants.",
+      "description": "Encode and decode plain text or binary assets with URL-safe compatibility and chunked RFC-4648 line breaking.",
+      "highlights": [
+        "Auto-detect",
+        "File upload"
+      ],
+      "badges": [
+        "0.1ms",
+        "RFC 4648"
+      ],
+      "trait": "Drag & Drop",
+      "note": "No Server Logs",
+      "status": "active",
+      "stars": 7200,
+      "version": "1.3.0",
+      "datePublished": "2024-01-28",
+      "featured": 5,
+      "quickAccess": 2
+    },
+    {
+      "id": 6,
+      "slug": "cron",
+      "name": "Cron Expression Evaluator",
+      "shortName": "Cron Inspector",
+      "categoryId": 4,
+      "icon": "event_repeat",
+      "summary": "Human-readable scheduling translation with the next 10 calculated execution timestamps.",
+      "description": "Translate cron expressions into plain English and preview the next 10 execution timestamps in any timezone.",
+      "highlights": [
+        "Standard & Quartz",
+        "Next runs"
+      ],
+      "badges": [
+        "0.2ms",
+        "POSIX cron"
+      ],
+      "trait": "Next 10 Runs",
+      "note": "Timezone Aware",
+      "status": "active",
+      "stars": 5200,
+      "version": "1.0.2",
+      "datePublished": "2024-05-02",
+      "featured": 6,
+      "quickAccess": 3
+    },
+    {
+      "id": 7,
+      "slug": "timestamp",
+      "name": "Unix Timestamp / Epoch Converter",
+      "shortName": "Timestamp Converter",
+      "categoryId": 3,
+      "icon": "schedule",
+      "summary": "Convert between Unix epoch, ISO-8601 and local time across worldwide timezones.",
+      "description": "Convert between Unix epoch milliseconds, seconds, and human readable ISO-8601 datetimes across worldwide timezones.",
+      "highlights": [
+        "Live Ticking",
+        "UTC / Local"
+      ],
+      "badges": [
+        "Live Ticking",
+        "UTC / Local"
+      ],
+      "trait": "Intl API",
+      "note": "Real-time Clock",
+      "status": "active",
+      "stars": 6900,
+      "version": "1.5.0",
+      "datePublished": "2024-02-09"
+    },
+    {
+      "id": 8,
+      "slug": "sql-formatter",
+      "name": "SQL Query Formatter",
+      "shortName": "SQL Formatter",
       "categoryId": 1,
-      "stars": 220,
-      "tags": [
-        "json",
-        "format"
-      ]
+      "icon": "database",
+      "summary": "Prettify and standardise dialect SQL with configurable keyword capitalization.",
+      "description": "Prettify and standardise dialect SQL (PostgreSQL, MySQL, SQLite, T-SQL) with configurable keyword capitalization.",
+      "highlights": [
+        "6 Dialects",
+        "Syntax AST"
+      ],
+      "badges": [
+        "0.3ms",
+        "6 Dialects"
+      ],
+      "trait": "Syntax AST",
+      "note": "AST Preserved",
+      "status": "active",
+      "stars": 6100,
+      "version": "1.6.0",
+      "datePublished": "2024-06-18"
+    },
+    {
+      "id": 9,
+      "slug": "url-encoder",
+      "name": "URL Encoder / Decoder",
+      "shortName": "URL Encoder",
+      "categoryId": 2,
+      "icon": "link",
+      "summary": "Safely encode URI components or parse query strings into editable JSON.",
+      "description": "Safely encode URI components or parse complex query parameter strings into structured editable JSON dictionaries.",
+      "highlights": [
+        "Encode",
+        "Decode",
+        "Query parser"
+      ],
+      "badges": [
+        "0.1ms",
+        "RFC 3986"
+      ],
+      "trait": "Param Parser",
+      "note": "Query Splitting",
+      "status": "active",
+      "stars": 5800,
+      "version": "1.1.1",
+      "datePublished": "2024-03-22"
+    },
+    {
+      "id": 10,
+      "slug": "yaml-json",
+      "name": "YAML to JSON Converter",
+      "shortName": "YAML to JSON",
+      "categoryId": 3,
+      "icon": "swap_horiz",
+      "summary": "Bidirectional serialization between YAML and JSON documents.",
+      "description": "Seamless bidirectional serialization between YAML specifications and JSON documents with document anchors support.",
+      "highlights": [
+        "YAML 1.2",
+        "Anchors"
+      ],
+      "badges": [
+        "0.4ms",
+        "YAML 1.2"
+      ],
+      "trait": "Bidirectional",
+      "note": "Multi-doc Ready",
+      "status": "active",
+      "stars": 4300,
+      "version": "1.0.0",
+      "datePublished": "2024-07-30"
+    },
+    {
+      "id": 11,
+      "slug": "hash-generator",
+      "name": "Password & Hash Generator",
+      "shortName": "Hash Generator",
+      "categoryId": 4,
+      "icon": "tag",
+      "summary": "Compute SHA-256, SHA-512, MD5 and bcrypt hashes plus entropy-driven passwords.",
+      "description": "Compute SHA-256, SHA-512, MD5, and bcrypt client-side verification alongside custom entropy-driven password strings.",
+      "highlights": [
+        "SHA-256",
+        "bcrypt",
+        "Passwords"
+      ],
+      "badges": [
+        "0.2ms",
+        "SubtleCrypto"
+      ],
+      "trait": "Entropy Guard",
+      "note": "Zero Remote Echo",
+      "status": "active",
+      "stars": 4900,
+      "version": "1.2.1",
+      "datePublished": "2024-04-25"
+    },
+    {
+      "id": 12,
+      "slug": "css-generator",
+      "name": "CSS Flexbox & Grid Generator",
+      "shortName": "CSS Generator",
+      "categoryId": 4,
+      "icon": "view_quilt",
+      "summary": "Visual sandbox that outputs production-ready CSS and Tailwind snippets.",
+      "description": "Visual sandbox that outputs production-ready CSS snippets, Tailwind utilities, and responsive container coordinates.",
+      "highlights": [
+        "Flexbox",
+        "Grid",
+        "Tailwind"
+      ],
+      "badges": [
+        "Live Canvas",
+        "Tailwind JIT"
+      ],
+      "trait": "W3C Modern",
+      "note": "Interactive Preview",
+      "status": "active",
+      "stars": 3800,
+      "version": "0.9.0",
+      "datePublished": "2024-08-14"
     }
   ],
   "t7_categories": [
     {
       "id": 1,
-      "name": "Utilities"
+      "slug": "formatters",
+      "name": "Formatters"
     },
     {
       "id": 2,
-      "name": "Security"
+      "slug": "encoders",
+      "name": "Encoders"
+    },
+    {
+      "id": 3,
+      "slug": "converters",
+      "name": "Converters"
+    },
+    {
+      "id": 4,
+      "slug": "generators",
+      "name": "Generators"
     }
   ],
   "t7_snippets": [
     {
       "id": 1,
       "toolId": 1,
-      "title": "Email regex",
-      "code": "/^\\S+@\\S+\\.\\S+$/"
+      "title": "Pretty print",
+      "language": "js",
+      "code": "JSON.stringify(obj, null, 2)"
     },
     {
       "id": 2,
+      "toolId": 1,
+      "title": "Minify",
+      "language": "js",
+      "code": "JSON.stringify(JSON.parse(text))"
+    },
+    {
+      "id": 3,
       "toolId": 2,
-      "title": "Pretty print",
-      "code": "JSON.stringify(obj, null, 2)"
+      "title": "Decode payload",
+      "language": "js",
+      "code": "JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')))"
+    },
+    {
+      "id": 4,
+      "toolId": 2,
+      "title": "Check expiry",
+      "language": "js",
+      "code": "Date.now() >= payload.exp * 1000"
+    },
+    {
+      "id": 5,
+      "toolId": 3,
+      "title": "Simple email",
+      "language": "regex",
+      "code": "/^\\S+@\\S+\\.\\S+$/"
+    },
+    {
+      "id": 6,
+      "toolId": 3,
+      "title": "Named groups",
+      "language": "regex",
+      "code": "/(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})/"
+    },
+    {
+      "id": 7,
+      "toolId": 4,
+      "title": "Random UUID v4",
+      "language": "js",
+      "code": "crypto.randomUUID()"
+    },
+    {
+      "id": 8,
+      "toolId": 4,
+      "title": "Bulk batch",
+      "language": "js",
+      "code": "Array.from({ length: 5 }, () => crypto.randomUUID())"
+    },
+    {
+      "id": 9,
+      "toolId": 5,
+      "title": "Encode UTF-8",
+      "language": "js",
+      "code": "btoa(String.fromCharCode(...new TextEncoder().encode(text)))"
+    },
+    {
+      "id": 10,
+      "toolId": 5,
+      "title": "URL-safe variant",
+      "language": "js",
+      "code": "b64.replace(/\\+/g, '-').replace(/\\//g, '_').replace(/=+$/, '')"
+    },
+    {
+      "id": 11,
+      "toolId": 6,
+      "title": "Every 15 minutes",
+      "language": "cron",
+      "code": "*/15 * * * *"
+    },
+    {
+      "id": 12,
+      "toolId": 6,
+      "title": "Weekdays at 09:00",
+      "language": "cron",
+      "code": "0 9 * * 1-5"
+    },
+    {
+      "id": 13,
+      "toolId": 7,
+      "title": "Now in seconds",
+      "language": "js",
+      "code": "Math.floor(Date.now() / 1000)"
+    },
+    {
+      "id": 14,
+      "toolId": 7,
+      "title": "Epoch to ISO",
+      "language": "js",
+      "code": "new Date(1700000000 * 1000).toISOString()"
+    },
+    {
+      "id": 15,
+      "toolId": 8,
+      "title": "Join with filter",
+      "language": "sql",
+      "code": "SELECT u.id, o.total\nFROM users u\nJOIN orders o ON o.user_id = u.id\nWHERE o.total > 100;"
+    },
+    {
+      "id": 16,
+      "toolId": 8,
+      "title": "Pagination",
+      "language": "sql",
+      "code": "SELECT * FROM users ORDER BY id LIMIT 20 OFFSET 40;"
+    },
+    {
+      "id": 17,
+      "toolId": 9,
+      "title": "Encode component",
+      "language": "js",
+      "code": "encodeURIComponent('a b&c=d')"
+    },
+    {
+      "id": 18,
+      "toolId": 9,
+      "title": "Parse query string",
+      "language": "js",
+      "code": "Object.fromEntries(new URLSearchParams(location.search))"
+    },
+    {
+      "id": 19,
+      "toolId": 10,
+      "title": "Anchors and merge",
+      "language": "yaml",
+      "code": "defaults: &defaults\n  retries: 3\nservice:\n  <<: *defaults"
+    },
+    {
+      "id": 20,
+      "toolId": 10,
+      "title": "List",
+      "language": "yaml",
+      "code": "- json\n- yaml"
+    },
+    {
+      "id": 21,
+      "toolId": 11,
+      "title": "SHA-256 digest",
+      "language": "js",
+      "code": "await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))"
+    },
+    {
+      "id": 22,
+      "toolId": 11,
+      "title": "Random bytes",
+      "language": "js",
+      "code": "crypto.getRandomValues(new Uint8Array(16))"
+    },
+    {
+      "id": 23,
+      "toolId": 12,
+      "title": "Center with flexbox",
+      "language": "css",
+      "code": "display: flex;\njustify-content: center;\nalign-items: center;"
+    },
+    {
+      "id": 24,
+      "toolId": 12,
+      "title": "Responsive grid",
+      "language": "css",
+      "code": "display: grid;\ngrid-template-columns: repeat(auto-fit, minmax(240px, 1fr));\ngap: 1rem;"
     }
   ],
   "t8_markets": [

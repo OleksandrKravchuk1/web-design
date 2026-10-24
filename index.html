@@ -1,23 +1,125 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Web Labs Starter</title>
+<%- include('partials/head', { titleKey: "meta.home.title", descriptionKey: "meta.home.description" }) %>
 </head>
 <body>
-  <header class="u-header">
-    <nav class="u-nav">
-      <a href="#" class="u-logo">MySite</a>
-      <ul class="u-menu">
-        <li><a href="#/home">Home</a></li>
-        <li><a href="#/list">List</a></li>
-        <li><a href="#/about">About</a></li>
+<%- include('partials/header') %>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="dt-hero" aria-labelledby="hero-title">
+    <p class="dt-hero__eyebrow">
+      <data value="<%= tools.length %>"><%= tools.length %></data>
+      <span data-i18n="home.hero.eyebrow"><%= t("home.hero.eyebrow") %></span>
+    </p>
+    <h1 class="dt-hero__title" id="hero-title">
+      <span data-i18n="home.hero.titleLead"><%= t("home.hero.titleLead") %></span>
+      <span class="dt-hero__accent" data-i18n="home.hero.titleAccent"><%= t("home.hero.titleAccent") %></span>
+    </h1>
+    <p class="dt-hero__lead" data-i18n="home.hero.lead"><%= t("home.hero.lead") %></p>
+
+    <form class="dt-search" role="search" action="./tools.html" method="get">
+      <label class="dt-search__label" for="hero-search" data-i18n="home.hero.searchLabel"><%= t("home.hero.searchLabel") %></label>
+      <input class="dt-search__input" id="hero-search" type="search" name="q" autocomplete="off" placeholder="<%= t("home.hero.searchPlaceholder") %>" data-i18n-attr="placeholder:home.hero.searchPlaceholder">
+      <button class="dt-button dt-button--accent" type="submit" data-i18n="common.search"><%= t("common.search") %></button>
+    </form>
+
+    <nav class="dt-quick-access" aria-labelledby="quick-access-label">
+      <p class="dt-quick-access__label" id="quick-access-label" data-i18n="home.hero.quickAccess"><%= t("home.hero.quickAccess") %></p>
+      <ul class="dt-quick-access__list">
+        <% tools.filter((tool) => tool.quickAccess).sort((a, b) => a.quickAccess - b.quickAccess).forEach((tool) => { %>
+        <li class="dt-quick-access__item"><a class="dt-pill" href="./<%= toolUrl(tool) %>"><%= tool.shortName %></a></li>
+        <% }) %>
       </ul>
     </nav>
-  </header>
-  <main id="app"></main>
-  <footer class="u-footer">© 2025</footer>
-  <script type="module" src="/src/js/main.js"></script>
+
+    <p class="dt-hero__actions">
+      <a class="dt-button dt-button--accent" href="./tools.html" data-i18n="home.hero.explore"><%= t("home.hero.explore") %></a>
+      <a class="dt-button dt-button--secondary" href="./tool.html?tool=json-formatter" data-i18n="home.hero.workspace"><%= t("home.hero.workspace") %></a>
+    </p>
+  </section>
+
+  <!-- STATS -->
+  <section class="dt-stats" aria-label="<%= t("home.stats.label") %>" data-i18n-attr="aria-label:home.stats.label">
+    <dl class="dt-stats__list">
+      <div class="dt-stat">
+        <dt class="dt-stat__label" data-i18n="home.stats.catalog.label"><%= t("home.stats.catalog.label") %></dt>
+        <dd class="dt-stat__value">
+          <data value="<%= tools.length %>"><%= tools.length %></data>
+          <span data-i18n="home.stats.catalog.value"><%= t("home.stats.catalog.value") %></span>
+        </dd>
+        <dd class="dt-stat__note" data-i18n="home.stats.catalog.note"><%= t("home.stats.catalog.note") %></dd>
+      </div>
+      <div class="dt-stat">
+        <dt class="dt-stat__label" data-i18n="home.stats.usage.label"><%= t("home.stats.usage.label") %></dt>
+        <dd class="dt-stat__value">
+          <data value="1200000">1.2M+</data>
+          <span data-i18n="home.stats.usage.value"><%= t("home.stats.usage.value") %></span>
+        </dd>
+        <dd class="dt-stat__note" data-i18n="home.stats.usage.note"><%= t("home.stats.usage.note") %></dd>
+      </div>
+      <div class="dt-stat">
+        <dt class="dt-stat__label" data-i18n="home.stats.speed.label"><%= t("home.stats.speed.label") %></dt>
+        <dd class="dt-stat__value">
+          <data value="0">0.0ms</data>
+          <span data-i18n="home.stats.speed.value"><%= t("home.stats.speed.value") %></span>
+        </dd>
+        <dd class="dt-stat__note" data-i18n="home.stats.speed.note"><%= t("home.stats.speed.note") %></dd>
+      </div>
+      <div class="dt-stat">
+        <dt class="dt-stat__label" data-i18n="home.stats.license.label"><%= t("home.stats.license.label") %></dt>
+        <dd class="dt-stat__value">
+          <data value="100">100%</data>
+          <span data-i18n="home.stats.license.value"><%= t("home.stats.license.value") %></span>
+        </dd>
+        <dd class="dt-stat__note" data-i18n="home.stats.license.note"><%= t("home.stats.license.note") %></dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- TOOLKIT: категорії і картки з api/db.json -->
+  <section class="dt-toolkit" aria-labelledby="toolkit-title">
+    <header class="dt-toolkit__header">
+      <p class="dt-toolkit__eyebrow" data-i18n="home.toolkit.eyebrow"><%= t("home.toolkit.eyebrow") %></p>
+      <h2 class="dt-toolkit__title" id="toolkit-title" data-i18n="home.toolkit.title"><%= t("home.toolkit.title") %></h2>
+      <p class="dt-toolkit__lead" data-i18n="home.toolkit.lead"><%= t("home.toolkit.lead") %></p>
+
+      <nav class="dt-filter" aria-label="<%= t("home.toolkit.filterLabel") %>" data-i18n-attr="aria-label:home.toolkit.filterLabel">
+        <ul class="dt-filter__list">
+          <li class="dt-filter__item"><a class="dt-pill dt-pill--active" href="./tools.html" aria-current="true" data-i18n="home.toolkit.all"><%= t("home.toolkit.all") %></a></li>
+          <% categories.forEach((category) => { %>
+          <li class="dt-filter__item"><a class="dt-pill" href="./tools.html?category=<%= category.slug %>"><%= category.name %></a></li>
+          <% }) %>
+        </ul>
+      </nav>
+    </header>
+
+    <ul class="dt-grid">
+      <% featured.forEach((tool, index) => { %>
+      <li class="dt-grid__item"><%- include('partials/tool-card', { tool, variant: "home", highlight: index === 0 }) %></li>
+      <% }) %>
+    </ul>
+  </section>
+
+  <!-- PRIVACY -->
+  <aside class="dt-cta" aria-labelledby="privacy-title">
+    <p class="dt-cta__eyebrow" data-i18n="home.privacy.eyebrow"><%= t("home.privacy.eyebrow") %></p>
+    <h2 class="dt-cta__title" id="privacy-title" data-i18n="home.privacy.title"><%= t("home.privacy.title") %></h2>
+    <p class="dt-cta__text" data-i18n="home.privacy.text"><%= t("home.privacy.text") %></p>
+    <ul class="dt-cta__points">
+      <li data-i18n="home.privacy.noTelemetry"><%= t("home.privacy.noTelemetry") %></li>
+      <li data-i18n="home.privacy.offline"><%= t("home.privacy.offline") %></li>
+      <li data-i18n="home.privacy.wasm"><%= t("home.privacy.wasm") %></li>
+    </ul>
+    <p class="dt-cta__actions">
+      <a class="dt-button dt-button--accent" href="./tools.html" data-i18n="home.privacy.viewAll"><%= t("home.privacy.viewAll") %></a>
+      <a class="dt-button dt-button--secondary" href="./about.html#architecture" data-i18n="home.privacy.architecture"><%= t("home.privacy.architecture") %></a>
+    </p>
+  </aside>
+</main>
+
+<%- include('partials/footer') %>
+<script type="module" src="./src/js/main.js"></script>
 </body>
 </html>
