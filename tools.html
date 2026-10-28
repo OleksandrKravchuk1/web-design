@@ -6,8 +6,6 @@
 <body>
 <%- include('partials/header') %>
 <%
-  // Перша сторінка каталогу: сортування «Most Popular», 9 карток на сторінку.
-  // У ЛР4 фільтри, пошук, сортування й пагінацію виконуватиме JS через json-server.
   const perPage = 9;
   const sorted = [...tools].sort((a, b) => b.stars - a.stars);
   const pageTools = sorted.slice(0, perPage);
@@ -16,7 +14,6 @@
 %>
 
 <main id="main">
-  <!-- HEADER: хлібні крихти, заголовок, ключові факти -->
   <header class="dt-catalog-header">
     <%- include('partials/breadcrumbs', { items: [
       { key: "breadcrumbs.root", href: "./index.html" },
@@ -40,7 +37,6 @@
     </dl>
   </header>
 
-  <!-- FILTERS: звичайна GET-форма — працює без JS; у ЛР4 JS перехоплює submit -->
   <form class="dt-filters" role="search" action="./tools.html" method="get" aria-label="<%= t("tools.filters.label") %>" data-i18n-attr="aria-label:tools.filters.label">
     <p class="dt-filters__field">
       <label class="dt-filters__label" for="catalog-search" data-i18n="tools.filters.searchLabel"><%= t("tools.filters.searchLabel") %></label>
@@ -91,7 +87,6 @@
     <button class="dt-button dt-button--accent" type="submit" data-i18n="tools.filters.apply"><%= t("tools.filters.apply") %></button>
   </form>
 
-  <!-- TOOLBAR: лічильник і перемикач вигляду (aria-pressed; поведінка — у ЛР4) -->
   <div class="dt-catalog-toolbar">
     <p class="dt-catalog-toolbar__count" role="status">
       <span data-i18n="tools.count.showing"><%= t("tools.count.showing") %></span>
@@ -106,7 +101,6 @@
     </div>
   </div>
 
-  <!-- RESULTS: картки з api/db.json, мікророзмітка ItemList -->
   <div class="dt-catalog" itemscope itemtype="https://schema.org/ItemList">
     <meta itemprop="numberOfItems" content="<%= tools.length %>">
     <ol class="dt-grid">
@@ -119,14 +113,12 @@
     </ol>
   </div>
 
-  <!-- EMPTY STATE: показується в ЛР4, коли фільтри нічого не знайшли -->
   <section class="dt-empty" aria-labelledby="empty-title" hidden>
     <h2 class="dt-empty__title" id="empty-title" data-i18n="tools.empty.title"><%= t("tools.empty.title") %></h2>
     <p class="dt-empty__text" data-i18n="tools.empty.text"><%= t("tools.empty.text") %></p>
     <a class="dt-button dt-button--secondary" href="./tools.html" data-i18n="tools.empty.reset"><%= t("tools.empty.reset") %></a>
   </section>
 
-  <!-- PAGINATION -->
   <nav class="dt-pagination" aria-label="<%= t("tools.pagination.label") %>" data-i18n-attr="aria-label:tools.pagination.label">
     <ul class="dt-pagination__list">
       <li class="dt-pagination__item">

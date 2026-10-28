@@ -7,7 +7,6 @@
 <%- include('partials/header') %>
 
 <main id="main">
-  <!-- HERO -->
   <section class="dt-hero" aria-labelledby="hero-title">
     <p class="dt-hero__eyebrow">
       <data value="<%= tools.length %>"><%= tools.length %></data>
@@ -40,7 +39,6 @@
     </p>
   </section>
 
-  <!-- STATS -->
   <section class="dt-stats" aria-label="<%= t("home.stats.label") %>" data-i18n-attr="aria-label:home.stats.label">
     <dl class="dt-stats__list">
       <div class="dt-stat">
@@ -78,7 +76,6 @@
     </dl>
   </section>
 
-  <!-- TOOLKIT: категорії і картки з api/db.json -->
   <section class="dt-toolkit" aria-labelledby="toolkit-title">
     <header class="dt-toolkit__header">
       <p class="dt-toolkit__eyebrow" data-i18n="home.toolkit.eyebrow"><%= t("home.toolkit.eyebrow") %></p>
@@ -102,7 +99,6 @@
     </ul>
   </section>
 
-  <!-- PRIVACY -->
   <aside class="dt-cta" aria-labelledby="privacy-title">
     <p class="dt-cta__eyebrow" data-i18n="home.privacy.eyebrow"><%= t("home.privacy.eyebrow") %></p>
     <h2 class="dt-cta__title" id="privacy-title" data-i18n="home.privacy.title"><%= t("home.privacy.title") %></h2>

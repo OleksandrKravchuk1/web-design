@@ -7,16 +7,11 @@ import ejs from "ejs";
 const root = dirname(fileURLToPath(import.meta.url));
 const TEMPLATES = resolve(root, "src/templates");
 
-/** Сторінки проєкту (multi-page build). Нові сторінки додаємо по мірі готовності. */
 const PAGES = {
   home: "index.html",
   tools: "tools.html",
 };
 
-/**
- * Дані для шаблонів читаються щоразу заново,
- * щоб зміни в db.json / словнику одразу з'являлися в dev-режимі.
- */
 function templateData() {
   const db = JSON.parse(readFileSync(resolve(root, "api/db.json"), "utf8"));
   const en = JSON.parse(readFileSync(resolve(root, "src/i18n/en.json"), "utf8"));
@@ -28,7 +23,6 @@ function templateData() {
     snippets: db.t7_snippets.filter((s) => s.toolId === tool.id),
   }));
 
-  /** t('nav.home') → англійський текст зі словника (ключ дублюється в data-i18n) */
   const t = (key) => {
     const value = key.split(".").reduce((obj, part) => (obj ? obj[part] : undefined), en);
     if (typeof value !== "string") {
@@ -48,10 +42,6 @@ function templateData() {
   };
 }
 
-/**
- * EJS як серверний (build-time) шаблонізатор: шапка, підвал, картки
- * підключаються через <%- include('partials/...') %> прямо в HTML-сторінках.
- */
 function ejsPages() {
   return {
     name: "devtools-ejs-pages",
@@ -63,7 +53,6 @@ function ejsPages() {
           filename: ctx.filename,
           views: [TEMPLATES],
         });
-        // на місці тегів <% %> EJS лишає рядки з самими пробілами — прибираємо їх
         return rendered.replace(/[ \t]+(?=\r?\n)/g, "");
       },
     },
@@ -77,7 +66,6 @@ function ejsPages() {
 }
 
 export default defineConfig({
-  // відносні шляхи — сайт працює і з кореня домену, і з підпапки GitHub Pages
   base: "./",
   root: ".",
   plugins: [ejsPages()],

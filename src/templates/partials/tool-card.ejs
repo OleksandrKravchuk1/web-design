@@ -1,9 +1,3 @@
-<%#
-  Картка інструменту (BEM-блок dt-tool-card) з мікророзміткою schema.org SoftwareApplication.
-  Параметри: tool, variant ('home' | 'catalog'), highlight (bool, акцентна кнопка), headingLevel (за замовчуванням 3),
-  itemprop (необов'язковий, напр. 'item' — коли картка вкладена в ItemList).
-  Іконки з макета додаються в ЛР3 разом зі стилями.
-%>
 <%
   const level = locals.headingLevel || 3;
   const isHighlight = Boolean(locals.highlight);
