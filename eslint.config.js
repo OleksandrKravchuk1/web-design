@@ -19,7 +19,6 @@ export default [
     },
   },
   {
-    // Node-скрипти: конфіг збірки й перевірки
     files: ["vite.config.js", "eslint.config.js", "scripts/**/*.js"],
     languageOptions: { globals: { ...globals.node } },
   },

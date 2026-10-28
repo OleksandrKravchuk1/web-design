@@ -1,15 +1,10 @@
-<%#
-  Картка інструменту (BEM-блок dt-tool-card) з мікророзміткою schema.org SoftwareApplication.
-  Параметри: tool, variant ('home' | 'catalog'), highlight (bool, акцентна кнопка), headingLevel (за замовчуванням 3).
-  Іконки з макета додаються в ЛР3 разом зі стилями.
-%>
 <%
   const level = locals.headingLevel || 3;
   const isHighlight = Boolean(locals.highlight);
   const titleId = `tool-title-${tool.slug}`;
   const description = variant === "home" ? tool.summary : tool.description;
 %>
-<article class="dt-tool-card dt-tool-card--<%= variant %><%= isHighlight ? " dt-tool-card--highlight" : "" %>" itemscope itemtype="https://schema.org/SoftwareApplication" aria-labelledby="<%= titleId %>">
+<article class="dt-tool-card dt-tool-card--<%= variant %><%= isHighlight ? " dt-tool-card--highlight" : "" %>" itemscope itemtype="https://schema.org/SoftwareApplication"<% if (locals.itemprop) { %> itemprop="<%= locals.itemprop %>"<% } %> aria-labelledby="<%= titleId %>">
   <p class="dt-tool-card__category"><a class="dt-pill" href="./tools.html?category=<%= tool.category.slug %>"><%= tool.category.name %></a></p>
   <h<%= level %> class="dt-tool-card__title" id="<%= titleId %>" itemprop="name"><%= tool.name %></h<%= level %>>
   <p class="dt-tool-card__description" itemprop="description"><%= description %></p>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head', { titleKey: "meta.tools.title", descriptionKey: "meta.tools.description" }) %>
+</head>
+<body>
+<%- include('partials/header') %>
+<%
+  const perPage = 9;
+  const sorted = [...tools].sort((a, b) => b.stars - a.stars);
+  const pageTools = sorted.slice(0, perPage);
+  const pageCount = Math.ceil(tools.length / perPage);
+  const countIn = (category) => tools.filter((tool) => tool.categoryId === category.id).length;
+%>
+
+<main id="main">
+  <header class="dt-catalog-header">
+    <%- include('partials/breadcrumbs', { items: [
+      { key: "breadcrumbs.root", href: "./index.html" },
+      { key: "tools.breadcrumb" },
+    ] }) %>
+    <p class="dt-catalog-header__version">
+      <data value="<%= site.version %>">v<%= site.version %></data>
+      <span data-i18n="tools.versionActive"><%= t("tools.versionActive") %></span>
+    </p>
+    <h1 class="dt-catalog-header__title" data-i18n="tools.title"><%= t("tools.title") %></h1>
+    <p class="dt-catalog-header__lead" data-i18n="tools.lead"><%= t("tools.lead") %></p>
+    <dl class="dt-catalog-header__facts">
+      <div class="dt-fact">
+        <dt data-i18n="tools.facts.privacy"><%= t("tools.facts.privacy") %></dt>
+        <dd data-i18n="tools.facts.privacyValue"><%= t("tools.facts.privacyValue") %></dd>
+      </div>
+      <div class="dt-fact">
+        <dt data-i18n="tools.facts.latency"><%= t("tools.facts.latency") %></dt>
+        <dd>&lt; 0.4ms</dd>
+      </div>
+    </dl>
+  </header>
+
+  <form class="dt-filters" role="search" action="./tools.html" method="get" aria-label="<%= t("tools.filters.label") %>" data-i18n-attr="aria-label:tools.filters.label">
+    <p class="dt-filters__field">
+      <label class="dt-filters__label" for="catalog-search" data-i18n="tools.filters.searchLabel"><%= t("tools.filters.searchLabel") %></label>
+      <input class="dt-filters__input" id="catalog-search" type="search" name="q" autocomplete="off" placeholder="<%= t("tools.filters.searchPlaceholder") %>" data-i18n-attr="placeholder:tools.filters.searchPlaceholder">
+    </p>
+
+    <fieldset class="dt-filters__group">
+      <legend class="dt-filters__legend" data-i18n="tools.filters.category"><%= t("tools.filters.category") %></legend>
+      <label class="dt-filters__option">
+        <input type="radio" name="category" value="" checked>
+        <span data-i18n="tools.filters.all"><%= t("tools.filters.all") %></span>
+        <data value="<%= tools.length %>">(<%= tools.length %>)</data>
+      </label>
+      <% categories.forEach((category) => { %>
+      <label class="dt-filters__option">
+        <input type="radio" name="category" value="<%= category.slug %>">
+        <span><%= category.name %></span>
+        <data value="<%= countIn(category) %>">(<%= countIn(category) %>)</data>
+      </label>
+      <% }) %>
+    </fieldset>
+
+    <p class="dt-filters__field">
+      <label class="dt-filters__label" for="catalog-sort" data-i18n="tools.filters.sort"><%= t("tools.filters.sort") %></label>
+      <select class="dt-filters__select" id="catalog-sort" name="sort">
+        <option value="popular" selected data-i18n="tools.sort.popular"><%= t("tools.sort.popular") %></option>
+        <option value="name" data-i18n="tools.sort.name"><%= t("tools.sort.name") %></option>
+        <option value="recent" data-i18n="tools.sort.recent"><%= t("tools.sort.recent") %></option>
+      </select>
+    </p>
+
+    <p class="dt-filters__field">
+      <label class="dt-filters__label" for="catalog-limit" data-i18n="tools.filters.perPage"><%= t("tools.filters.perPage") %></label>
+      <select class="dt-filters__select" id="catalog-limit" name="limit">
+        <% [9, 18, 36].forEach((size) => { %>
+        <option value="<%= size %>"<%= size === perPage ? " selected" : "" %>><%= size %></option>
+        <% }) %>
+      </select>
+    </p>
+
+    <p class="dt-filters__field">
+      <label class="dt-filters__option">
+        <input type="checkbox" name="local" value="1" checked>
+        <span data-i18n="tools.filters.localOnly"><%= t("tools.filters.localOnly") %></span>
+      </label>
+    </p>
+
+    <button class="dt-button dt-button--accent" type="submit" data-i18n="tools.filters.apply"><%= t("tools.filters.apply") %></button>
+  </form>
+
+  <div class="dt-catalog-toolbar">
+    <p class="dt-catalog-toolbar__count" role="status">
+      <span data-i18n="tools.count.showing"><%= t("tools.count.showing") %></span>
+      <data value="<%= pageTools.length %>"><%= pageTools.length %></data>
+      <span data-i18n="tools.count.of"><%= t("tools.count.of") %></span>
+      <data value="<%= tools.length %>"><%= tools.length %></data>
+      <span data-i18n="tools.count.tools"><%= t("tools.count.tools") %></span>
+    </p>
+    <div class="dt-view-toggle" role="group" aria-label="<%= t("tools.view.label") %>" data-i18n-attr="aria-label:tools.view.label">
+      <button class="dt-view-toggle__button" type="button" aria-pressed="true" data-i18n="tools.view.grid"><%= t("tools.view.grid") %></button>
+      <button class="dt-view-toggle__button" type="button" aria-pressed="false" data-i18n="tools.view.list"><%= t("tools.view.list") %></button>
+    </div>
+  </div>
+
+  <div class="dt-catalog" itemscope itemtype="https://schema.org/ItemList">
+    <meta itemprop="numberOfItems" content="<%= tools.length %>">
+    <ol class="dt-grid">
+      <% pageTools.forEach((tool, index) => { %>
+      <li class="dt-grid__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <meta itemprop="position" content="<%= index + 1 %>">
+        <%- include('partials/tool-card', { tool, variant: "catalog", highlight: index === 0, headingLevel: 2, itemprop: "item" }) %>
+      </li>
+      <% }) %>
+    </ol>
+  </div>
+
+  <section class="dt-empty" aria-labelledby="empty-title" hidden>
+    <h2 class="dt-empty__title" id="empty-title" data-i18n="tools.empty.title"><%= t("tools.empty.title") %></h2>
+    <p class="dt-empty__text" data-i18n="tools.empty.text"><%= t("tools.empty.text") %></p>
+    <a class="dt-button dt-button--secondary" href="./tools.html" data-i18n="tools.empty.reset"><%= t("tools.empty.reset") %></a>
+  </section>
+
+  <nav class="dt-pagination" aria-label="<%= t("tools.pagination.label") %>" data-i18n-attr="aria-label:tools.pagination.label">
+    <ul class="dt-pagination__list">
+      <li class="dt-pagination__item">
+        <span class="dt-pagination__link dt-pagination__link--disabled" aria-disabled="true" data-i18n="tools.pagination.previous"><%= t("tools.pagination.previous") %></span>
+      </li>
+      <% for (let number = 1; number <= pageCount; number++) { %>
+      <li class="dt-pagination__item">
+        <a class="dt-pagination__link" href="./tools.html?page=<%= number %>"<%- number === 1 ? ' aria-current="page"' : "" %>><%= number %></a>
+      </li>
+      <% } %>
+      <li class="dt-pagination__item">
+        <% if (pageCount > 1) { %>
+        <a class="dt-pagination__link" href="./tools.html?page=2" rel="next" data-i18n="tools.pagination.next"><%= t("tools.pagination.next") %></a>
+        <% } else { %>
+        <span class="dt-pagination__link dt-pagination__link--disabled" aria-disabled="true" data-i18n="tools.pagination.next"><%= t("tools.pagination.next") %></span>
+        <% } %>
+      </li>
+    </ul>
+  </nav>
+
+  <p class="dt-catalog-note">
+    <span data-i18n="tools.note.local"><%= t("tools.note.local") %></span>
+    <span data-i18n="tools.note.network"><%= t("tools.note.network") %></span>
+  </p>
+</main>
+
+<%- include('partials/footer') %>
+<script type="module" src="./src/js/main.js"></script>
+</body>
+</html>
