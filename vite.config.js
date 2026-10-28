@@ -10,6 +10,7 @@ const TEMPLATES = resolve(root, "src/templates");
 const PAGES = {
   home: "index.html",
   tools: "tools.html",
+  about: "about.html",
 };
 
 function templateData() {

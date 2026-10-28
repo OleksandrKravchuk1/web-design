@@ -7,6 +7,10 @@
     "tools": {
       "title": "All Developer Micro-Utilities — DevTools Showcase",
       "description": "Filterable catalog of client-side developer tools: formatters, encoders, converters and generators."
+    },
+    "about": {
+      "title": "About — DevTools Showcase",
+      "description": "Why DevTools Showcase exists: zero telemetry, client-side execution, keyboard-first UX and an open MIT-licensed codebase."
     }
   },
   "a11y": {
@@ -154,6 +158,104 @@
     "note": {
       "local": "Executed locally in sandbox",
       "network": "Zero network requests"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "About Dev Tools Showcase",
+      "title": "Zero-Telemetry Developer Tools Built for Raw Velocity",
+      "lead": "We built DevTools Showcase to replace bloated web converters that track user inputs, require constant internet roundtrips, and bombard engineers with advertisements.",
+      "tags": {
+        "telemetry": "Zero telemetry",
+        "wasm": "Client-side WASM",
+        "license": "MIT Licensed"
+      }
+    },
+    "principles": {
+      "label": "Our principles",
+      "privacy": {
+        "tag": "Local-Only",
+        "title": "100% Client-Side Privacy",
+        "text": "Every regex, JSON payload, token, and hash is computed inside your local browser via WebAssembly and WebWorkers. Zero network payloads.",
+        "metaLabel": "Network I/O",
+        "metaValue": "0 Packets Emitted"
+      },
+      "keyboard": {
+        "tag": "Zero Mouse",
+        "title": "Instant Keyboard-First UX",
+        "text": "Built with global command palettes, instant hotkeys, and automated clipboard reading for uninterrupted focus.",
+        "metaLabel": "Command Shortcut"
+      },
+      "open": {
+        "tag": "<15m setup",
+        "title": "Extensible & Transparent",
+        "text": "Open-source under MIT. Standardized micro-utility architecture makes contributing a new tool take under 15 minutes.",
+        "metaLabel": "License Protocol",
+        "metaValue": "MIT Permissive"
+      }
+    },
+    "architecture": {
+      "eyebrow": "Architecture",
+      "title": "Under the Hood",
+      "lead": "Constructed with a lean compile footprint to eliminate latency, ensure cold-start execution under 20ms, and maintain strict sandbox barriers.",
+      "stackLabel": "Technology stack",
+      "sandbox": "Sandbox Security Matrix",
+      "isolated": "100% Isolated"
+    },
+    "benchmarks": {
+      "caption": "Runtime Benchmarks",
+      "metric": "Metric",
+      "value": "Value",
+      "target": "Target",
+      "rows": {
+        "startup": {
+          "name": "Avg Tool Startup",
+          "note": "Cold worker hydration"
+        },
+        "memory": {
+          "name": "Memory Footprint",
+          "note": "Active tab heap limit"
+        },
+        "network": {
+          "name": "Network Requests",
+          "note": "During operation runtime"
+        }
+      },
+      "targets": {
+        "p99": "P99 target",
+        "leak": "Zero leak delta",
+        "airgap": "Complete airgap"
+      },
+      "environment": "Environment: Chromium V8 124+ · Calibrated"
+    },
+    "faq": {
+      "eyebrow": "Frequently Asked Questions",
+      "title": "Privacy, Safety & Architecture FAQ",
+      "lead": "Everything you need to know about our compute security guarantees and open repository standard.",
+      "items": {
+        "payloads": {
+          "question": "Are my payloads, tokens, or sensitive JSON strings saved to any server?",
+          "answer": "Never. All compute happens synchronously inside your browser context. No analytics, no telemetry, no backend databases. Even if you disconnect your WiFi, every single utility functions identically."
+        },
+        "offline": {
+          "question": "Can I use Dev Tools Showcase offline or in air-gapped environments?",
+          "answer": "Yes. Once a page has loaded, every utility runs locally and needs no network connection, so it keeps working in air-gapped environments."
+        },
+        "contribute": {
+          "question": "How can I submit or contribute a new micro-tool?",
+          "answer": "Fork the repository on GitHub, add your tool as a small self-contained module and open a pull request. The contribution guide in the README describes the steps."
+        },
+        "free": {
+          "question": "Is it completely free and open source?",
+          "answer": "Yes. The source code is MIT-licensed and every utility is free to use, with no accounts, usage limits or ads."
+        }
+      }
+    },
+    "contribute": {
+      "title": "Build the next micro-utility with us on GitHub",
+      "text": "Join over 140+ contributors creating the fastest developer toolkit.",
+      "github": "View on GitHub",
+      "guide": "Read Contribution Guide"
     }
   }
 }

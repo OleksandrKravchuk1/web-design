@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head', { titleKey: "meta.about.title", descriptionKey: "meta.about.description" }) %>
+</head>
+<body>
+<%- include('partials/header') %>
+<%
+  const stack = ["Vite", "EJS", "SCSS 7-1", "ES Modules", "json-server", "Web Crypto API"];
+  const benchmarks = [
+    { key: "startup", value: "12ms", target: "p99" },
+    { key: "memory", value: "<18MB", target: "leak" },
+    { key: "network", value: "0", target: "airgap" },
+  ];
+  const faq = ["payloads", "offline", "contribute", "free"];
+%>
+
+<main id="main">
+  <section class="dt-about-hero" aria-labelledby="about-title">
+    <p class="dt-about-hero__eyebrow" data-i18n="about.hero.eyebrow"><%= t("about.hero.eyebrow") %></p>
+    <h1 class="dt-about-hero__title" id="about-title" data-i18n="about.hero.title"><%= t("about.hero.title") %></h1>
+    <p class="dt-about-hero__lead" data-i18n="about.hero.lead"><%= t("about.hero.lead") %></p>
+    <ul class="dt-about-hero__tags">
+      <li class="dt-pill" data-i18n="about.hero.tags.telemetry"><%= t("about.hero.tags.telemetry") %></li>
+      <li class="dt-pill" data-i18n="about.hero.tags.wasm"><%= t("about.hero.tags.wasm") %></li>
+      <li class="dt-pill" data-i18n="about.hero.tags.license"><%= t("about.hero.tags.license") %></li>
+    </ul>
+  </section>
+
+  <section class="dt-principles" aria-label="<%= t("about.principles.label") %>" data-i18n-attr="aria-label:about.principles.label">
+    <article class="dt-principle" aria-labelledby="principle-privacy">
+      <p class="dt-principle__tag" data-i18n="about.principles.privacy.tag"><%= t("about.principles.privacy.tag") %></p>
+      <h2 class="dt-principle__title" id="principle-privacy" data-i18n="about.principles.privacy.title"><%= t("about.principles.privacy.title") %></h2>
+      <p class="dt-principle__text" data-i18n="about.principles.privacy.text"><%= t("about.principles.privacy.text") %></p>
+      <dl class="dt-principle__meta">
+        <dt data-i18n="about.principles.privacy.metaLabel"><%= t("about.principles.privacy.metaLabel") %></dt>
+        <dd data-i18n="about.principles.privacy.metaValue"><%= t("about.principles.privacy.metaValue") %></dd>
+      </dl>
+    </article>
+
+    <article class="dt-principle" aria-labelledby="principle-keyboard">
+      <p class="dt-principle__tag" data-i18n="about.principles.keyboard.tag"><%= t("about.principles.keyboard.tag") %></p>
+      <h2 class="dt-principle__title" id="principle-keyboard" data-i18n="about.principles.keyboard.title"><%= t("about.principles.keyboard.title") %></h2>
+      <p class="dt-principle__text" data-i18n="about.principles.keyboard.text"><%= t("about.principles.keyboard.text") %></p>
+      <dl class="dt-principle__meta">
+        <dt data-i18n="about.principles.keyboard.metaLabel"><%= t("about.principles.keyboard.metaLabel") %></dt>
+        <dd><kbd>⌘</kbd> <kbd>K</kbd></dd>
+      </dl>
+    </article>
+
+    <article class="dt-principle" aria-labelledby="principle-open">
+      <p class="dt-principle__tag" data-i18n="about.principles.open.tag"><%= t("about.principles.open.tag") %></p>
+      <h2 class="dt-principle__title" id="principle-open" data-i18n="about.principles.open.title"><%= t("about.principles.open.title") %></h2>
+      <p class="dt-principle__text" data-i18n="about.principles.open.text"><%= t("about.principles.open.text") %></p>
+      <dl class="dt-principle__meta">
+        <dt data-i18n="about.principles.open.metaLabel"><%= t("about.principles.open.metaLabel") %></dt>
+        <dd data-i18n="about.principles.open.metaValue"><%= t("about.principles.open.metaValue") %></dd>
+      </dl>
+    </article>
+  </section>
+
+  <section class="dt-architecture" id="architecture" aria-labelledby="architecture-title">
+    <p class="dt-architecture__eyebrow" data-i18n="about.architecture.eyebrow"><%= t("about.architecture.eyebrow") %></p>
+    <h2 class="dt-architecture__title" id="architecture-title" data-i18n="about.architecture.title"><%= t("about.architecture.title") %></h2>
+    <p class="dt-architecture__lead" data-i18n="about.architecture.lead"><%= t("about.architecture.lead") %></p>
+
+    <ul class="dt-architecture__stack" aria-label="<%= t("about.architecture.stackLabel") %>" data-i18n-attr="aria-label:about.architecture.stackLabel">
+      <% stack.forEach((item) => { %>
+      <li class="dt-pill"><%= item %></li>
+      <% }) %>
+    </ul>
+
+    <p class="dt-architecture__sandbox">
+      <label for="sandbox-isolation" data-i18n="about.architecture.sandbox"><%= t("about.architecture.sandbox") %></label>
+      <meter id="sandbox-isolation" min="0" max="100" value="100">100%</meter>
+      <span data-i18n="about.architecture.isolated"><%= t("about.architecture.isolated") %></span>
+    </p>
+
+    <table class="dt-benchmarks">
+      <caption class="dt-benchmarks__caption" data-i18n="about.benchmarks.caption"><%= t("about.benchmarks.caption") %></caption>
+      <thead>
+        <tr>
+          <th scope="col" data-i18n="about.benchmarks.metric"><%= t("about.benchmarks.metric") %></th>
+          <th scope="col" data-i18n="about.benchmarks.value"><%= t("about.benchmarks.value") %></th>
+          <th scope="col" data-i18n="about.benchmarks.target"><%= t("about.benchmarks.target") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% benchmarks.forEach((row) => { %>
+        <tr>
+          <th scope="row">
+            <span data-i18n="about.benchmarks.rows.<%= row.key %>.name"><%= t(`about.benchmarks.rows.${row.key}.name`) %></span>
+            <small data-i18n="about.benchmarks.rows.<%= row.key %>.note"><%= t(`about.benchmarks.rows.${row.key}.note`) %></small>
+          </th>
+          <td><data value="<%= row.value %>"><%= row.value %></data></td>
+          <td data-i18n="about.benchmarks.targets.<%= row.target %>"><%= t(`about.benchmarks.targets.${row.target}`) %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" data-i18n="about.benchmarks.environment"><%= t("about.benchmarks.environment") %></td>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <section class="dt-faq" aria-labelledby="faq-title" itemscope itemtype="https://schema.org/FAQPage">
+    <p class="dt-faq__eyebrow" data-i18n="about.faq.eyebrow"><%= t("about.faq.eyebrow") %></p>
+    <h2 class="dt-faq__title" id="faq-title" data-i18n="about.faq.title"><%= t("about.faq.title") %></h2>
+    <p class="dt-faq__lead" data-i18n="about.faq.lead"><%= t("about.faq.lead") %></p>
+
+    <% faq.forEach((key, index) => { %>
+    <details class="dt-faq__item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"<%= index === 0 ? " open" : "" %>>
+      <summary class="dt-faq__question" itemprop="name" data-i18n="about.faq.items.<%= key %>.question"><%= t(`about.faq.items.${key}.question`) %></summary>
+      <div class="dt-faq__answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+        <p itemprop="text" data-i18n="about.faq.items.<%= key %>.answer"><%= t(`about.faq.items.${key}.answer`) %></p>
+      </div>
+    </details>
+    <% }) %>
+  </section>
+
+  <aside class="dt-cta dt-cta--github" aria-labelledby="contribute-title">
+    <p class="dt-cta__eyebrow"><code>git clone <%= site.repository %>.git</code></p>
+    <h2 class="dt-cta__title" id="contribute-title" data-i18n="about.contribute.title"><%= t("about.contribute.title") %></h2>
+    <p class="dt-cta__text" data-i18n="about.contribute.text"><%= t("about.contribute.text") %></p>
+    <p class="dt-cta__actions">
+      <a class="dt-button dt-button--accent" href="<%= site.repository %>">
+        <span data-i18n="about.contribute.github"><%= t("about.contribute.github") %></span>
+        <data value="<%= site.stars %>">★ <%= site.stars %></data>
+      </a>
+      <a class="dt-button dt-button--secondary" href="<%= site.repository %>#readme" data-i18n="about.contribute.guide"><%= t("about.contribute.guide") %></a>
+    </p>
+  </aside>
+</main>
+
+<%- include('partials/footer') %>
+<script type="module" src="./src/js/main.js"></script>
+</body>
+</html>
