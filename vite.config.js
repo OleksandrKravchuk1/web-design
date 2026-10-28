@@ -10,6 +10,7 @@ const TEMPLATES = resolve(root, "src/templates");
 /** Сторінки проєкту (multi-page build). Нові сторінки додаємо по мірі готовності. */
 const PAGES = {
   home: "index.html",
+  tools: "tools.html",
 };
 
 /**

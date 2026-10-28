@@ -3,6 +3,10 @@
     "home": {
       "title": "DevTools Showcase — Developer Utilities in Your Browser",
       "description": "Client-side micro-utilities for developers: JSON formatting, Base64, regex testing, JWT decoding and more. Zero tracking, instant execution."
+    },
+    "tools": {
+      "title": "All Developer Micro-Utilities — DevTools Showcase",
+      "description": "Filterable catalog of client-side developer tools: formatters, encoders, converters and generators."
     }
   },
   "a11y": {
@@ -95,6 +99,61 @@
       "wasm": "WebAssembly Engine",
       "viewAll": "View All Utilities",
       "architecture": "Security Architecture"
+    }
+  },
+  "breadcrumbs": {
+    "label": "Breadcrumb",
+    "root": "DevTools"
+  },
+  "tools": {
+    "breadcrumb": "Catalog",
+    "versionActive": "Active",
+    "title": "All Developer Micro-Utilities",
+    "lead": "Filterable catalog of client-side developer tooling, optimized for rapid developer workflows with instant WebAssembly-driven execution.",
+    "facts": {
+      "privacy": "Privacy",
+      "privacyValue": "100% In-Browser",
+      "latency": "Latency"
+    },
+    "filters": {
+      "label": "Search and filter tools",
+      "searchLabel": "Search micro-utilities",
+      "searchPlaceholder": "Search micro-utilities (e.g. JSON, UUID, SQL, Hash, Regex)…",
+      "category": "Category",
+      "all": "All",
+      "sort": "Sort by",
+      "perPage": "Items per page",
+      "localOnly": "Client-side only",
+      "apply": "Apply filters"
+    },
+    "sort": {
+      "popular": "Most Popular",
+      "name": "Alphabetical (A-Z)",
+      "recent": "Recently Added"
+    },
+    "count": {
+      "showing": "Showing",
+      "of": "of",
+      "tools": "tools"
+    },
+    "view": {
+      "label": "View",
+      "grid": "Grid view",
+      "list": "List view"
+    },
+    "empty": {
+      "title": "No matching micro-utilities found",
+      "text": "Try adjusting your filter parameters or query keyword. All queries are parsed locally in real-time.",
+      "reset": "Reset Filters"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "note": {
+      "local": "Executed locally in sandbox",
+      "network": "Zero network requests"
     }
   }
 }

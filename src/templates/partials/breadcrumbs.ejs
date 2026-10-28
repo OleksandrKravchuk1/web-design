@@ -1,0 +1,23 @@
+<%#
+  Хлібні крихти з мікророзміткою schema.org BreadcrumbList.
+  Параметри: items — [{ label, key?, href? }]. key — ключ словника (тоді label береться з en.json),
+  останній елемент без href — це поточна сторінка.
+%>
+<nav class="dt-breadcrumbs" aria-label="<%= t("breadcrumbs.label") %>" data-i18n-attr="aria-label:breadcrumbs.label">
+  <ol class="dt-breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <% items.forEach((item, index) => { %>
+    <%
+      const label = item.key ? t(item.key) : item.label;
+      const i18n = item.key ? ` data-i18n="${item.key}"` : "";
+    %>
+    <li class="dt-breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <% if (item.href) { %>
+      <a class="dt-breadcrumbs__link" href="<%= item.href %>" itemprop="item"><span itemprop="name"<%- i18n %>><%= label %></span></a>
+      <% } else { %>
+      <span class="dt-breadcrumbs__current" aria-current="page" itemprop="name"<%- i18n %>><%= label %></span>
+      <% } %>
+      <meta itemprop="position" content="<%= index + 1 %>">
+    </li>
+    <% }) %>
+  </ol>
+</nav>
