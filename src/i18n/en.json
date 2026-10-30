@@ -11,6 +11,10 @@
     "about": {
       "title": "About — DevTools Showcase",
       "description": "Why DevTools Showcase exists: zero telemetry, client-side execution, keyboard-first UX and an open MIT-licensed codebase."
+    },
+    "tool": {
+      "title": "JSON Validator & Formatter — DevTools Showcase",
+      "description": "Validate, format, minify and sort JSON in your browser. Nothing leaves your tab."
     }
   },
   "a11y": {
@@ -256,6 +260,94 @@
       "text": "Join over 140+ contributors creating the fastest developer toolkit.",
       "github": "View on GitHub",
       "guide": "Read Contribution Guide"
+    }
+  },
+  "toolPage": {
+    "sandbox": "Active Sandbox",
+    "facts": {
+      "input": "Input",
+      "status": "Status",
+      "valid": "Valid JSON (RFC 8259)",
+      "render": "Render"
+    },
+    "form": {
+      "label": "JSON workspace"
+    },
+    "actions": {
+      "label": "Formatting actions",
+      "format": "Format JSON (2 spaces)",
+      "minify": "Minify / Compact",
+      "sort": "Sort Keys (A-Z)",
+      "copy": "Copy Output",
+      "download": "Download .json"
+    },
+    "input": {
+      "title": "Input JSON",
+      "lines": "Lines:",
+      "load": "Load File",
+      "sample": "Sample",
+      "clear": "Clear"
+    },
+    "output": {
+      "title": "Formatted Output",
+      "indent": "Indentation",
+      "sp2": "2 Sp",
+      "sp4": "4 Sp",
+      "tab": "Tab",
+      "view": "View mode",
+      "code": "Code",
+      "tree": "Tree",
+      "raw": "Raw"
+    },
+    "status": {
+      "valid": "✓ Valid JSON syntax • 0 errors found",
+      "encoding": "UTF-8 • LF",
+      "depth": "Depth: 3 levels • 10 keys • 2 arrays",
+      "balanced": "Syntactically Balanced"
+    },
+    "preview": {
+      "alt": "Screenshot of the JSON Validator & Formatter workspace with the input JSON on the left and the formatted, key-sorted output on the right.",
+      "caption": "Preview of the JSON workspace: input and formatted output side by side."
+    },
+    "params": {
+      "title": "Parameters",
+      "lead": "Fine-tune parsing rules and formatting engines before serialization.",
+      "legend": "Formatting options",
+      "auto": "Auto-format on paste",
+      "trailing": "Remove trailing commas",
+      "unicode": "Escape unicode characters",
+      "arrays": "Sort array primitives"
+    },
+    "cheat": {
+      "title": "Cheatsheet & Usage",
+      "step1": "Paste your raw string or drop any valid .json file into the left editor pane.",
+      "step2": "Select spacing indentation or click sorting triggers to reorganize lexicographically.",
+      "step3": "Use the Tree mode to collapse deeply nested schemas or copy output directly.",
+      "shortcuts": "Shortcuts",
+      "action": "Action",
+      "keys": "Keys",
+      "format": "Format",
+      "minify": "Minify",
+      "copy": "Copy"
+    },
+    "privacy": {
+      "title": "Privacy Guarantee",
+      "text": "100% in-browser WebWorker execution. No payloads, authorization tokens, or customer data ever transit to any backend server.",
+      "network": "Network Requests",
+      "networkValue": "0 outbound calls",
+      "storage": "Storage Engine",
+      "storageValue": "Transient Heap RAM",
+      "spec": "Specification",
+      "specValue": "ECMA-404 / RFC 8259",
+      "verified": "Zero Server Footprint Verified"
+    },
+    "snippets": {
+      "title": "Code snippets",
+      "lead": "Handy one-liners for working with JSON."
+    },
+    "related": {
+      "title": "More tools",
+      "lead": "Other micro-utilities you may need next."
     }
   }
 }

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('partials/head', { titleKey: "meta.tool.title", descriptionKey: "meta.tool.description" }) %>
+</head>
+<body>
+<%- include('partials/header') %>
+<%
+  const tool = tools.find((item) => item.slug === "json-formatter");
+  const related = tools.filter((item) => item.id !== tool.id).sort((a, b) => b.stars - a.stars).slice(0, 3);
+  const sample = {
+    service: "telemetry-router",
+    status: "operational",
+    version: "2.4.1",
+    nodes: [
+      { id: "node-us-east-1", healthy: true, latency_ms: 1.42, traffic_share: 0.45 },
+      { id: "node-eu-central-1", healthy: true, latency_ms: 8.91, traffic_share: 0.55 },
+    ],
+    configuration: { rate_limit: 10000, cors_enabled: true, upstream_timeout: null },
+  };
+  const sortKeys = (value) => {
+    if (Array.isArray(value)) {
+      return value.map(sortKeys);
+    }
+    if (value && typeof value === "object") {
+      return Object.fromEntries(Object.keys(value).sort().map((key) => [key, sortKeys(value[key])]));
+    }
+    return value;
+  };
+  const inputText = JSON.stringify(sample, null, 2);
+  const outputText = JSON.stringify(sortKeys(sample), null, 2);
+  const lineCount = inputText.split("\n").length;
+%>
+
+<main id="main">
+  <article class="dt-tool" itemscope itemtype="https://schema.org/SoftwareApplication" aria-labelledby="tool-title">
+    <header class="dt-tool__header">
+      <%- include('partials/breadcrumbs', { items: [
+        { key: "breadcrumbs.root", href: "./index.html" },
+        { label: tool.category.name, href: "./tools.html?category=" + tool.category.slug },
+        { label: tool.name },
+      ] }) %>
+      <h1 class="dt-tool__title" id="tool-title" itemprop="name"><%= tool.name %></h1>
+      <p class="dt-tool__status">
+        <span data-i18n="toolPage.sandbox"><%= t("toolPage.sandbox") %></span>
+        <data value="<%= tool.version %>">v<%= tool.version %></data>
+      </p>
+      <p class="dt-tool__lead" itemprop="description"><%= tool.description %></p>
+      <dl class="dt-tool__facts">
+        <div class="dt-fact">
+          <dt data-i18n="toolPage.facts.input"><%= t("toolPage.facts.input") %></dt>
+          <dd><data value="0.4">0.4 KB</data></dd>
+        </div>
+        <div class="dt-fact">
+          <dt data-i18n="toolPage.facts.status"><%= t("toolPage.facts.status") %></dt>
+          <dd data-i18n="toolPage.facts.valid"><%= t("toolPage.facts.valid") %></dd>
+        </div>
+        <div class="dt-fact">
+          <dt data-i18n="toolPage.facts.render"><%= t("toolPage.facts.render") %></dt>
+          <dd><data value="0.12">0.12ms</data></dd>
+        </div>
+      </dl>
+    </header>
+
+    <form class="dt-workspace" id="json-form" action="./tool.html" method="get" aria-label="<%= t("toolPage.form.label") %>" data-i18n-attr="aria-label:toolPage.form.label">
+      <input type="hidden" name="tool" value="<%= tool.slug %>">
+
+      <div class="dt-workspace__toolbar" role="toolbar" aria-label="<%= t("toolPage.actions.label") %>" data-i18n-attr="aria-label:toolPage.actions.label">
+        <button class="dt-button dt-button--accent" type="submit" name="action" value="format" aria-keyshortcuts="Control+Enter Meta+Enter" data-i18n="toolPage.actions.format"><%= t("toolPage.actions.format") %></button>
+        <button class="dt-button dt-button--secondary" type="submit" name="action" value="minify" aria-keyshortcuts="Control+Shift+M Meta+Shift+M" data-i18n="toolPage.actions.minify"><%= t("toolPage.actions.minify") %></button>
+        <button class="dt-button dt-button--secondary" type="submit" name="action" value="sort" data-i18n="toolPage.actions.sort"><%= t("toolPage.actions.sort") %></button>
+        <button class="dt-button dt-button--ghost" type="button" aria-keyshortcuts="Control+C Meta+C" data-i18n="toolPage.actions.copy"><%= t("toolPage.actions.copy") %></button>
+        <button class="dt-button dt-button--ghost" type="button" data-i18n="toolPage.actions.download"><%= t("toolPage.actions.download") %></button>
+      </div>
+
+      <div class="dt-workspace__panes">
+        <section class="dt-pane" aria-labelledby="input-title">
+          <header class="dt-pane__header">
+            <h2 class="dt-pane__title" id="input-title" data-i18n="toolPage.input.title"><%= t("toolPage.input.title") %></h2>
+            <p class="dt-pane__meta">
+              <span data-i18n="toolPage.input.lines"><%= t("toolPage.input.lines") %></span>
+              <data value="<%= lineCount %>"><%= lineCount %></data>
+            </p>
+            <p class="dt-pane__actions">
+              <label class="dt-button dt-button--ghost" for="json-file" data-i18n="toolPage.input.load"><%= t("toolPage.input.load") %></label>
+              <input class="dt-pane__file" id="json-file" type="file" name="file" accept=".json,application/json">
+              <button class="dt-button dt-button--ghost" type="button" data-i18n="toolPage.input.sample"><%= t("toolPage.input.sample") %></button>
+              <button class="dt-button dt-button--ghost" type="reset" data-i18n="toolPage.input.clear"><%= t("toolPage.input.clear") %></button>
+            </p>
+          </header>
+          <textarea class="dt-pane__editor" id="json-input" name="input" rows="<%= lineCount %>" spellcheck="false" aria-labelledby="input-title"><%= inputText %></textarea>
+          <footer class="dt-pane__footer">
+            <output class="dt-pane__status" for="json-input" data-i18n="toolPage.status.valid"><%= t("toolPage.status.valid") %></output>
+            <small data-i18n="toolPage.status.encoding"><%= t("toolPage.status.encoding") %></small>
+          </footer>
+        </section>
+
+        <section class="dt-pane" aria-labelledby="output-title">
+          <header class="dt-pane__header">
+            <h2 class="dt-pane__title" id="output-title" data-i18n="toolPage.output.title"><%= t("toolPage.output.title") %></h2>
+            <fieldset class="dt-segmented">
+              <legend class="dt-segmented__legend" data-i18n="toolPage.output.indent"><%= t("toolPage.output.indent") %></legend>
+              <label class="dt-segmented__option"><input type="radio" name="indent" value="2" checked> <span data-i18n="toolPage.output.sp2"><%= t("toolPage.output.sp2") %></span></label>
+              <label class="dt-segmented__option"><input type="radio" name="indent" value="4"> <span data-i18n="toolPage.output.sp4"><%= t("toolPage.output.sp4") %></span></label>
+              <label class="dt-segmented__option"><input type="radio" name="indent" value="tab"> <span data-i18n="toolPage.output.tab"><%= t("toolPage.output.tab") %></span></label>
+            </fieldset>
+            <fieldset class="dt-segmented">
+              <legend class="dt-segmented__legend" data-i18n="toolPage.output.view"><%= t("toolPage.output.view") %></legend>
+              <label class="dt-segmented__option"><input type="radio" name="view" value="code" checked> <span data-i18n="toolPage.output.code"><%= t("toolPage.output.code") %></span></label>
+              <label class="dt-segmented__option"><input type="radio" name="view" value="tree"> <span data-i18n="toolPage.output.tree"><%= t("toolPage.output.tree") %></span></label>
+              <label class="dt-segmented__option"><input type="radio" name="view" value="raw"> <span data-i18n="toolPage.output.raw"><%= t("toolPage.output.raw") %></span></label>
+            </fieldset>
+          </header>
+          <pre class="dt-pane__code" id="json-output" tabindex="0" aria-labelledby="output-title"><code><%= outputText %></code></pre>
+          <footer class="dt-pane__footer">
+            <small data-i18n="toolPage.status.depth"><%= t("toolPage.status.depth") %></small>
+            <small data-i18n="toolPage.status.balanced"><%= t("toolPage.status.balanced") %></small>
+          </footer>
+        </section>
+      </div>
+    </form>
+
+    <figure class="dt-tool__preview">
+      <%- include('partials/picture', {
+        base: "hero/workspace-desktop",
+        widths: [800, 1200, 1600],
+        fallbackWidth: 1200,
+        sizes: "(min-width: 1280px) 1200px, 100vw",
+        width: 1600,
+        height: 830,
+        altKey: "toolPage.preview.alt",
+        mobile: { base: "hero/workspace-mobile", widths: [380, 760], sizes: "100vw" },
+        imgCls: "dt-tool__preview-image",
+      }) %>
+      <figcaption class="dt-tool__caption" data-i18n="toolPage.preview.caption"><%= t("toolPage.preview.caption") %></figcaption>
+    </figure>
+
+    <div class="dt-tool__side">
+      <aside class="dt-panel" aria-labelledby="params-title">
+        <h2 class="dt-panel__title" id="params-title" data-i18n="toolPage.params.title"><%= t("toolPage.params.title") %></h2>
+        <p class="dt-panel__lead" data-i18n="toolPage.params.lead"><%= t("toolPage.params.lead") %></p>
+        <fieldset class="dt-panel__options">
+          <legend class="dt-panel__legend" data-i18n="toolPage.params.legend"><%= t("toolPage.params.legend") %></legend>
+          <label class="dt-option"><input type="checkbox" name="auto" form="json-form" checked> <span data-i18n="toolPage.params.auto"><%= t("toolPage.params.auto") %></span></label>
+          <label class="dt-option"><input type="checkbox" name="trailing" form="json-form" checked> <span data-i18n="toolPage.params.trailing"><%= t("toolPage.params.trailing") %></span></label>
+          <label class="dt-option"><input type="checkbox" name="unicode" form="json-form"> <span data-i18n="toolPage.params.unicode"><%= t("toolPage.params.unicode") %></span></label>
+          <label class="dt-option"><input type="checkbox" name="arrays" form="json-form"> <span data-i18n="toolPage.params.arrays"><%= t("toolPage.params.arrays") %></span></label>
+        </fieldset>
+      </aside>
+
+      <aside class="dt-panel" aria-labelledby="cheat-title">
+        <h2 class="dt-panel__title" id="cheat-title" data-i18n="toolPage.cheat.title"><%= t("toolPage.cheat.title") %></h2>
+        <ol class="dt-panel__steps">
+          <li data-i18n="toolPage.cheat.step1"><%= t("toolPage.cheat.step1") %></li>
+          <li data-i18n="toolPage.cheat.step2"><%= t("toolPage.cheat.step2") %></li>
+          <li data-i18n="toolPage.cheat.step3"><%= t("toolPage.cheat.step3") %></li>
+        </ol>
+        <table class="dt-shortcuts">
+          <caption class="dt-shortcuts__caption" data-i18n="toolPage.cheat.shortcuts"><%= t("toolPage.cheat.shortcuts") %></caption>
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="toolPage.cheat.action"><%= t("toolPage.cheat.action") %></th>
+              <th scope="col" data-i18n="toolPage.cheat.keys"><%= t("toolPage.cheat.keys") %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" data-i18n="toolPage.cheat.format"><%= t("toolPage.cheat.format") %></th>
+              <td><kbd>⌘</kbd> <kbd>Enter</kbd></td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="toolPage.cheat.minify"><%= t("toolPage.cheat.minify") %></th>
+              <td><kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>M</kbd></td>
+            </tr>
+            <tr>
+              <th scope="row" data-i18n="toolPage.cheat.copy"><%= t("toolPage.cheat.copy") %></th>
+              <td><kbd>⌘</kbd> <kbd>C</kbd></td>
+            </tr>
+          </tbody>
+        </table>
+      </aside>
+
+      <aside class="dt-panel" aria-labelledby="privacy-title">
+        <h2 class="dt-panel__title" id="privacy-title" data-i18n="toolPage.privacy.title"><%= t("toolPage.privacy.title") %></h2>
+        <p class="dt-panel__lead" data-i18n="toolPage.privacy.text"><%= t("toolPage.privacy.text") %></p>
+        <dl class="dt-panel__meta">
+          <div class="dt-fact">
+            <dt data-i18n="toolPage.privacy.network"><%= t("toolPage.privacy.network") %></dt>
+            <dd data-i18n="toolPage.privacy.networkValue"><%= t("toolPage.privacy.networkValue") %></dd>
+          </div>
+          <div class="dt-fact">
+            <dt data-i18n="toolPage.privacy.storage"><%= t("toolPage.privacy.storage") %></dt>
+            <dd data-i18n="toolPage.privacy.storageValue"><%= t("toolPage.privacy.storageValue") %></dd>
+          </div>
+          <div class="dt-fact">
+            <dt data-i18n="toolPage.privacy.spec"><%= t("toolPage.privacy.spec") %></dt>
+            <dd data-i18n="toolPage.privacy.specValue"><%= t("toolPage.privacy.specValue") %></dd>
+          </div>
+        </dl>
+        <p class="dt-panel__note" data-i18n="toolPage.privacy.verified"><%= t("toolPage.privacy.verified") %></p>
+      </aside>
+    </div>
+
+    <section class="dt-snippets" aria-labelledby="snippets-title">
+      <h2 class="dt-snippets__title" id="snippets-title" data-i18n="toolPage.snippets.title"><%= t("toolPage.snippets.title") %></h2>
+      <p class="dt-snippets__lead" data-i18n="toolPage.snippets.lead"><%= t("toolPage.snippets.lead") %></p>
+      <% tool.snippets.forEach((snippet) => { %>
+      <figure class="dt-snippet">
+        <figcaption class="dt-snippet__title"><%= snippet.title %></figcaption>
+        <pre class="dt-snippet__code" tabindex="0"><code class="language-<%= snippet.language %>"><%= snippet.code %></code></pre>
+      </figure>
+      <% }) %>
+    </section>
+
+    <meta itemprop="applicationCategory" content="DeveloperApplication">
+    <meta itemprop="operatingSystem" content="Any (web browser)">
+    <meta itemprop="softwareVersion" content="<%= tool.version %>">
+    <meta itemprop="datePublished" content="<%= tool.datePublished %>">
+    <meta itemprop="author" content="<%= site.author %>">
+    <link itemprop="license" href="https://opensource.org/licenses/MIT">
+    <link itemprop="screenshot" href="./images/hero/workspace-desktop-1200.jpg">
+    <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+      <meta itemprop="price" content="0">
+      <meta itemprop="priceCurrency" content="USD">
+    </span>
+  </article>
+
+  <section class="dt-related" aria-labelledby="related-title">
+    <h2 class="dt-related__title" id="related-title" data-i18n="toolPage.related.title"><%= t("toolPage.related.title") %></h2>
+    <p class="dt-related__lead" data-i18n="toolPage.related.lead"><%= t("toolPage.related.lead") %></p>
+    <ul class="dt-grid">
+      <% related.forEach((item) => { %>
+      <li class="dt-grid__item"><%- include('partials/tool-card', { tool: item, variant: "home" }) %></li>
+      <% }) %>
+    </ul>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
+<script type="module" src="./src/js/main.js"></script>
+</body>
+</html>
