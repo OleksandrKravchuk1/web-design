@@ -1,0 +1,15 @@
+<%
+  const lazy = locals.lazy !== false;
+  const type = (ext) => (ext === "webp" ? "image/webp" : "image/jpeg");
+  const srcset = (base, list, ext) => list.map((width) => `./images/${base}-${width}.${ext} ${width}w`).join(", ");
+  const fallback = locals.fallbackWidth || locals.widths[locals.widths.length - 1];
+%>
+<picture<%- locals.cls ? ` class="${locals.cls}"` : "" %>>
+  <% if (locals.mobile) { %>
+  <% ["webp", "jpg"].forEach((ext) => { %>
+  <source media="(max-width: 767px)" type="<%= type(ext) %>" srcset="<%= srcset(mobile.base, mobile.widths, ext) %>" sizes="<%= mobile.sizes || "100vw" %>">
+  <% }) %>
+  <% } %>
+  <source type="image/webp" srcset="<%= srcset(base, widths, "webp") %>" sizes="<%= sizes %>">
+  <img<%- locals.imgCls ? ` class="${imgCls}"` : "" %> src="./images/<%= base %>-<%= fallback %>.jpg" srcset="<%= srcset(base, widths, "jpg") %>" sizes="<%= sizes %>" width="<%= width %>" height="<%= height %>" alt="<%= t(altKey) %>" data-i18n-attr="alt:<%= altKey %>"<%- lazy ? ' loading="lazy"' : "" %> decoding="async">
+</picture>
