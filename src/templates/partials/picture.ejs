@@ -7,7 +7,7 @@
 <picture<%- locals.cls ? ` class="${locals.cls}"` : "" %>>
   <% if (locals.mobile) { %>
   <% ["webp", "jpg"].forEach((ext) => { %>
-  <source media="(max-width: 767px)" type="<%= type(ext) %>" srcset="<%= srcset(mobile.base, mobile.widths, ext) %>" sizes="<%= mobile.sizes || "100vw" %>">
+  <source media="(max-width: 767px)" type="<%= type(ext) %>" srcset="<%= srcset(mobile.base, mobile.widths, ext) %>" sizes="<%= mobile.sizes || "100vw" %>"<% if (mobile.width) { %> width="<%= mobile.width %>" height="<%= mobile.height %>"<% } %>>
   <% }) %>
   <% } %>
   <source type="image/webp" srcset="<%= srcset(base, widths, "webp") %>" sizes="<%= sizes %>">
