@@ -1,0 +1,67 @@
+@use "../abstracts" as *;
+
+.dt-header {
+  @include flex(row, space-between, center, space(3));
+
+  flex-wrap: wrap;
+  padding: space(3) rem($gutter-sm);
+  border-bottom: 1px solid $color-border;
+  background: $color-bg;
+
+  @include media-up(md) {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding-inline: rem($gutter-md);
+  }
+
+  @include media-up(lg) {
+    flex-wrap: nowrap;
+    gap: space(8);
+  }
+
+  &__brand {
+    @include flex(row, flex-start, center, space(2));
+  }
+
+  &__logo {
+    @include text-style(16px, 1.2, 700);
+    @include focus-ring;
+
+    white-space: nowrap;
+
+    @include media-up(md) {
+      @include text-style(18px, 1.2, 700);
+    }
+  }
+
+  &__version {
+    @include text-style(11px, 1.4, 600);
+
+    padding: 0 space(2);
+    border: 1px solid $color-border;
+    border-radius: $radius-pill;
+    color: $color-accent;
+    font-family: $font-mono;
+  }
+
+  &__actions {
+    @include flex(row, flex-end, center, space(2));
+  }
+
+  &__github {
+    display: none;
+
+    @include media-up(md) {
+      display: inline-flex;
+    }
+  }
+
+  &__quick-find kbd {
+    display: none;
+
+    @include media-up(md) {
+      display: inline-flex;
+    }
+  }
+}

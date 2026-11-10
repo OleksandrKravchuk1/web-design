@@ -1,0 +1,13 @@
+@use "../abstracts" as *;
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  @include container;
+
+  flex: 1;
+  padding-block: space(6) space(10);
+}

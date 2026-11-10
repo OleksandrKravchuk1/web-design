@@ -1,0 +1,18 @@
+@use "../abstracts" as *;
+
+.dt-skip-link {
+  position: absolute;
+  top: space(2);
+  left: space(2);
+  z-index: 100;
+  padding: space(2) space(4);
+  border-radius: $radius;
+  background: $color-accent;
+  color: $color-bg;
+  font-weight: 600;
+  transform: translateY(-200%);
+
+  &:focus {
+    transform: none;
+  }
+}

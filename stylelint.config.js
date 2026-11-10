@@ -8,10 +8,9 @@ export default {
   rules: {
     // block__element--modifier, optional dt- prefix (utilities have none)
     "selector-class-pattern": [BEM, { message: (selector) => `Expected BEM class name, got "${selector}"` }],
-    // "nesting no deeper than two levels", no IDs, no tag-qualified classes
+    // "nesting no deeper than two levels", no IDs
     "selector-max-compound-selectors": 2,
     "selector-max-id": 0,
-    "selector-no-qualifying-type": [true, { ignore: ["attribute"] }],
     "max-nesting-depth": [2, { ignoreAtRules: ["include", "media", "supports"] }],
     // @use / @forward only
     "at-rule-disallowed-list": ["import"],

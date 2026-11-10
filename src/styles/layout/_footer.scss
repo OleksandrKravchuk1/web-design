@@ -1,0 +1,51 @@
+@use "../abstracts" as *;
+
+.dt-footer {
+  @include flex(column, center, center, space(3));
+  @include text-style(12px, 1.5, 500);
+
+  padding: space(6) rem($gutter-sm);
+  border-top: 1px solid $color-border;
+  color: $color-text-muted;
+  font-family: $font-mono;
+  text-align: center;
+
+  @include media-up(md) {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-inline: rem($gutter-md);
+    text-align: left;
+  }
+
+  &__status {
+    @include flex(row, center, center, space(4));
+
+    flex-wrap: wrap;
+
+    &::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $color-success;
+    }
+  }
+
+  &__lang-list {
+    @include flex(row, center, center, space(1));
+  }
+
+  &__lang-link {
+    @include focus-ring;
+
+    display: block;
+    padding: space(1) space(3);
+    border: 1px solid $color-border;
+    border-radius: $radius-pill;
+
+    &:hover {
+      border-color: $color-accent;
+      color: $color-accent;
+    }
+  }
+}

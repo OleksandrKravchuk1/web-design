@@ -1,0 +1,20 @@
+@use "../abstracts" as *;
+
+.dt-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: space(4);
+
+  @include media-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: space(6);
+  }
+
+  @include media-up(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &__item {
+    display: flex;
+  }
+}
