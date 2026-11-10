@@ -1,14 +1,119 @@
-// _variables.scss
-$u-space-1: 4px;
-$u-space-2: 8px;
-$u-space-3: 12px;
-$u-space-4: 16px;
-$u-space-5: 24px;
+// Design tokens from the ЛР1 design system
+// (stitch_devtools_micro_utilities_platform/DESIGN.md).
+// Nothing here compiles to CSS on its own.
 
-$u-font-base: 16px;
-$u-font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+// ---------------------------------------------------------------- colours
+// Raw palette. Components never read it directly: themes/ turns it into
+// custom properties and components use color("name") from _functions.scss.
+$palette: (
+  "canvas": #0b0f19,
+  "surface-subtle": #111827,
+  "surface": #1f2937,
+  "border": #374151,
+  "border-strong": #4b5563,
+  "text": #f9fafb,
+  "text-secondary": #9ca3af,
+  "text-muted": #8b95a5, // #6b7280 in the mockup, lightened to pass WCAG AA on canvas
+  "accent": #38bdf8,
+  "accent-alt": #6366f1,
+  "success": #10b981,
+  "warning": #f59e0b,
+  "error": #ef4444,
+  "on-accent": #0b0f19,
+);
 
-$u-color-bg: #0f172a;
-$u-color-text: #e2e8f0;
-$u-color-accent: #38bdf8;
-$u-color-muted: #94a3b8;
+// Category colours used by pills on tool cards.
+$category-colors: (
+  "formatters": "accent",
+  "encoders": "accent-alt",
+  "converters": "success",
+  "generators": "text-secondary",
+);
+
+// ------------------------------------------------------------- typography
+$font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", roboto, arial, sans-serif;
+$font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, "Cascadia Code", consolas, monospace;
+$base-font-size: 16px;
+
+// Typographic roles: (size, line-height, weight, family, letter-spacing)
+$text-roles: (
+  "display": (40px, 48px, 700, sans, -0.02em),
+  "headline-xl": (32px, 40px, 700, sans, -0.01em),
+  "headline-lg": (24px, 32px, 600, sans, 0),
+  "headline-md": (18px, 24px, 600, sans, 0),
+  "body-lg": (16px, 24px, 400, sans, 0),
+  "body-md": (14px, 20px, 400, sans, 0),
+  "body-sm": (12px, 16px, 400, sans, 0),
+  "code-lg": (15px, 24px, 500, mono, 0),
+  "code-md": (13px, 20px, 400, mono, 0),
+  "code-sm": (11px, 16px, 500, mono, 0),
+  "label-caps": (11px, 14px, 600, mono, 0.06em),
+);
+
+// ----------------------------------------------------------------- layout
+$breakpoints: (
+  "sm": 360px,
+  "md": 768px,
+  "lg": 1280px,
+);
+$container-max: 1440px;
+$gutter-sm: 16px;
+$gutter-md: 24px;
+$gutter-lg: 32px;
+$header-height: 64px;
+$tabbar-height: 64px;
+
+// Spacing scale (px, converted with rem() / space()).
+$space: (
+  0: 0,
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
+  5: 20px,
+  6: 24px,
+  8: 32px,
+  10: 40px,
+  12: 48px,
+  16: 64px,
+);
+
+$radii: (
+  "sm": 2px,
+  "base": 4px,
+  "md": 6px,
+  "lg": 8px,
+  "xl": 12px,
+  "full": 9999px,
+);
+
+// Sizes that are not spacing: control heights, icon boxes.
+$control-height: 40px;
+$control-height-sm: 28px;
+$touch-target: 44px;
+$icon-sizes: (
+  "sm": 16px,
+  "md": 20px,
+  "lg": 24px,
+);
+
+// -------------------------------------------------------------- elevation
+$border-width: 1px;
+$focus-ring-width: 2px;
+
+// ---------------------------------------------------------------- motion
+$duration: (
+  "fast": 120ms,
+  "base": 200ms,
+  "slow": 320ms,
+);
+$easing: cubic-bezier(0.2, 0, 0, 1);
+
+// ---------------------------------------------------------------- layers
+$z-layers: (
+  "base": 1,
+  "sticky": 10,
+  "tabbar": 20,
+  "popover": 30,
+  "skip-link": 40,
+);

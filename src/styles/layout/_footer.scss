@@ -1,4 +1,0 @@
-// _footer.scss
-@use "../abstracts/mixins" as *;
-
-.u-footer { @include container(); padding: 24px 0; border-top: 1px solid rgba(255,255,255,.1); margin-top: 40px; }

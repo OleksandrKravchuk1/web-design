@@ -1,0 +1,35 @@
+// Placeholders: shared rule sets reused through @extend.
+// Kept tiny on purpose — @extend groups selectors, so it is only used for
+// blocks that really share the same look.
+@use "variables" as v;
+@use "functions" as f;
+@use "mixins" as m;
+
+// Mono uppercase eyebrow above section titles ("HANDCRAFTED UTILITIES").
+%eyebrow {
+  @include m.text-style("label-caps");
+  @include m.flex(row, flex-start, center, f.space(2));
+
+  margin: 0 0 f.space(2);
+  color: f.color("accent");
+}
+
+// Lead paragraph under a section title.
+%lead {
+  @include m.text-style("body-md");
+
+  max-width: 65ch;
+  margin: f.space(2) 0 0;
+  color: f.color("text-secondary");
+
+  @include m.media-up(md) {
+    @include m.text-style("body-lg");
+  }
+}
+
+// Fact / meta label in mono caps.
+%meta-label {
+  @include m.text-style("label-caps");
+
+  color: f.color("text-secondary");
+}

@@ -1,6 +1,70 @@
-// _typography.scss
-@use "../abstracts/functions" as *;
+// Element-level typography. Components override with their own roles.
+@use "../abstracts" as *;
 
-h1 { font-size: rem(32); }
-h2 { font-size: rem(24); }
-p  { font-size: rem(16); line-height: 1.6; }
+h1,
+h2,
+h3,
+h4 {
+  color: color("text");
+  text-wrap: balance;
+}
+
+h1 {
+  @include fluid-text("headline-xl", "display");
+}
+
+h2 {
+  @include fluid-text("headline-md", "headline-lg");
+}
+
+h3 {
+  @include text-style("headline-md");
+}
+
+p {
+  text-wrap: pretty;
+}
+
+small {
+  @include text-style("body-sm");
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: $font-mono;
+  font-feature-settings: "calt";
+}
+
+code {
+  font-size: 0.9em;
+}
+
+// Keycap chip from the design system.
+kbd {
+  @include text-style("code-sm");
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: rem(20);
+  height: rem(20);
+  padding-inline: space(1);
+  border: $border-width solid color("border-strong");
+  border-radius: radius("base");
+  background: color("surface-subtle");
+  box-shadow: inset 0 -1px 0 color("border");
+  color: color("text-secondary");
+}
+
+pre {
+  margin: 0;
+  overflow: auto;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
