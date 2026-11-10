@@ -1,70 +1,46 @@
-// Element-level typography. Components override with their own roles.
 @use "../abstracts" as *;
 
-h1,
-h2,
-h3,
-h4 {
-  color: color("text");
-  text-wrap: balance;
-}
-
 h1 {
-  @include fluid-text("headline-xl", "display");
+  @include text-style(32px, 1.25, 700);
+
+  @include media-up(md) {
+    @include text-style(40px, 1.2, 700);
+  }
 }
 
 h2 {
-  @include fluid-text("headline-md", "headline-lg");
+  @include text-style(20px, 1.3, 600);
+
+  @include media-up(md) {
+    @include text-style(24px, 1.33, 600);
+  }
 }
 
 h3 {
-  @include text-style("headline-md");
-}
-
-p {
-  text-wrap: pretty;
+  @include text-style(18px, 1.33, 600);
 }
 
 small {
-  @include text-style("body-sm");
+  @include text-style(12px, 1.33);
 }
 
 code,
 kbd,
-pre,
-samp {
+pre {
   font-family: $font-mono;
-  font-feature-settings: "calt";
 }
 
-code {
-  font-size: 0.9em;
-}
-
-// Keycap chip from the design system.
 kbd {
-  @include text-style("code-sm");
+  @include text-style(11px, 1, 500);
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: rem(20);
-  height: rem(20);
+  min-width: rem(20px);
+  height: rem(20px);
   padding-inline: space(1);
-  border: $border-width solid color("border-strong");
-  border-radius: radius("base");
-  background: color("surface-subtle");
-  box-shadow: inset 0 -1px 0 color("border");
-  color: color("text-secondary");
+  border: 1px solid $color-border;
+  border-radius: 4px;
+  background: $color-surface;
+  color: $color-text-muted;
 }
-
-pre {
-  margin: 0;
-  overflow: auto;
-}
-
-strong,
-b {
-  font-weight: 600;
-}
-

@@ -1,69 +1,16 @@
-// Functions return values. Everything that produces rules lives in _mixins.scss.
 @use "sass:math";
 @use "sass:map";
 @use "sass:color";
-@use "sass:meta";
-@use "variables" as v;
+@use "variables" as *;
 
-// px -> rem. rem(24) and rem(24px) both work.
 @function rem($px) {
-  @if meta.type-of($px) == "number" and math.is-unitless($px) {
-    $px: $px * 1px;
-  }
-
-  @return math.div($px, v.$base-font-size) * 1rem;
-}
-
-// Safe map lookup: a typo in a token name fails the build instead of
-// silently producing an empty value.
-@function token($map, $key, $name: "token") {
-  @if not map.has-key($map, $key) {
-    @error "Unknown #{$name}: `#{$key}`. Available: #{map.keys($map)}";
-  }
-
-  @return map.get($map, $key);
+  @return math.div($px, 16px) * 1rem;
 }
 
 @function space($key) {
-  @return rem(token(v.$space, $key, "space"));
+  @return rem(map.get($space, $key));
 }
 
-@function radius($key: "base") {
-  @return rem(token(v.$radii, $key, "radius"));
-}
-
-@function duration($key: "base") {
-  @return token(v.$duration, $key, "duration");
-}
-
-@function z($layer) {
-  @return token(v.$z-layers, $layer, "z-layer");
-}
-
-@function breakpoint($key) {
-  @return token(v.$breakpoints, $key, "breakpoint");
-}
-
-// Colour token -> custom property defined in themes/_default.scss.
-// color("accent") => var(--dt-color-accent)
-@function color($name) {
-  $_checked: token(v.$palette, $name, "colour");
-
-  @return var(--dt-color-#{$name});
-}
-
-// Translucent version of a token, still themable:
-// alpha("accent", 10%) => color-mix(in srgb, var(--dt-color-accent) 10%, transparent)
-@function alpha($name, $amount) {
-  @return color-mix(in srgb, color($name) $amount, transparent);
-}
-
-// Raw palette value (only for themes/ — components use color()).
-@function palette($name) {
-  @return token(v.$palette, $name, "colour");
-}
-
-// Classic colour helpers from the methodology (compile-time).
 @function tint($c, $amount) {
   @return color.mix(white, $c, $amount);
 }

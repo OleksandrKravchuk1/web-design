@@ -6,23 +6,6 @@ import ejs from "ejs";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const TEMPLATES = resolve(root, "src/templates");
-const ICONS = resolve(root, "node_modules/@material-symbols/svg-400/outlined");
-
-const iconPaths = new Map();
-
-// Inline Material Symbols icon (same set as the ЛР1 mockup), decorative only.
-function icon(name, cls = "") {
-  if (!iconPaths.has(name)) {
-    const svg = readFileSync(resolve(ICONS, `${name}.svg`), "utf8");
-    const paths = [...svg.matchAll(/<path d="([^"]+)"/g)].map((match) => match[1]);
-    if (paths.length === 0) {
-      throw new Error(`[icon] No <path> in ${name}.svg`);
-    }
-    iconPaths.set(name, paths.join(" "));
-  }
-  const className = cls ? `dt-icon ${cls}` : "dt-icon";
-  return `<svg class="${className}" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="${iconPaths.get(name)}"/></svg>`;
-}
 
 const PAGES = {
   home: "index.html",
@@ -57,7 +40,6 @@ function templateData() {
     featured: tools.filter((tool) => tool.featured).sort((a, b) => a.featured - b.featured),
     year: new Date().getFullYear(),
     t,
-    icon,
     toolUrl: (tool) => `tool.html?tool=${tool.slug}`,
   };
 }

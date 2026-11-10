@@ -1,21 +1,14 @@
-// Default (dark) theme: the palette from abstracts becomes custom properties.
-// Components only use color("name") => var(--dt-color-name), so a new theme
-// is one more block that redefines the same properties.
 @use "../abstracts" as *;
 
 :root {
-  @each $name, $value in $palette {
-    --dt-color-#{$name}: #{$value};
-  }
-
-  --dt-color-accent-hover: #{tint(palette("accent"), 15%)};
-  --dt-color-accent-pressed: #{shade(palette("accent"), 12%)};
-  --dt-gradient-accent: linear-gradient(135deg, #{palette("accent-alt")} 0%, #{palette("accent")} 100%);
-  --dt-gradient-hero:
-    radial-gradient(60% 80% at 50% 0%, #{rgba(palette("accent"), 0.12)} 0%, transparent 70%),
-    radial-gradient(50% 60% at 90% 30%, #{rgba(palette("success"), 0.06)} 0%, transparent 70%);
-  --dt-glow-accent: 0 0 15px -3px #{rgba(palette("accent"), 0.35)};
-  --dt-shadow-floating: 0 20px 25px -5px #{rgba(black, 0.6)}, 0 8px 10px -6px #{rgba(black, 0.4)};
-
   color-scheme: dark;
+}
+
+body {
+  background: $color-bg;
+  color: $color-text;
+}
+
+::selection {
+  background: rgba($color-accent, 0.3);
 }
