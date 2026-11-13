@@ -33,7 +33,7 @@ src/
   styles/               # SCSS 7-1 з шаблону — підключається в ЛР3
 public/images/          # адаптивні зображення (webp + jpg, кілька ширин)
 api/db.json             # json-server; t7_tools / t7_categories / t7_snippets розширено під дизайн
-scripts/                # перевірки збірки + генерація зображень
+scripts/                # перевірки збірки: check-src.js, check-dist.js
 ```
 
 ---
@@ -47,11 +47,11 @@ scripts/                # перевірки збірки + генерація �
 
 | Вимога | Де виконано |
 | --- | --- |
-| Семантичні теги | `header`, `nav` (головна, хлібні крихти, пагінація, підвал, мова), `main`, `section`, `article` (картки, принципи, сторінка інструменту), `aside` (фільтри, шпаргалка, приватність, схожі інструменти, CTA), `footer` (сторінки й карток), а також `figure/figcaption`, `dl`, `time`, `data`, `kbd`, `output`, `details/summary`, `dialog` |
+| Семантичні теги | `header`, `nav` (головна, хлібні крихти, пагінація, підвал, мова), `main`, `section`, `article` (картки, принципи, сторінка інструменту), `aside` (Home — блок приватності; Tool details — параметри, шпаргалка, гарантія приватності; About — заклик долучитися на GitHub), `footer` (сторінки й карток), а також `figure/figcaption`, `dl`, `time`, `data`, `kbd`, `output`, `details/summary`, `dialog` (Quick Find на Popover API) |
 | Таблиці | `tool.html` — клавіатурні скорочення; `about.html` — бенчмарки (`caption`, `th scope`) |
 | Форми | пошук у hero і Quick Find (`role="search"`), фільтри каталогу (`fieldset/legend`, radio, select, checkbox), робоча область JSON (`textarea`, `input type=file`, `output`), форма «Suggest a micro-tool» (валідація `required`, `autocomplete`, `aria-describedby`) |
-| `picture` + `srcset` | усі ключові зображення: webp + jpg запасний варіант, `sizes`; hero / preview — **art direction** (окремий кадр для `max-width: 767px`); `width`/`height` проти CLS, `loading="lazy"` |
-| `alt` і `aria-label` | змістовні `alt` у скріншотів; обкладинки карток декоративні (`alt=""` — назва вже є в заголовку картки, за WCAG H67); `aria-label`/`aria-labelledby` для навігацій і кнопок, `aria-current="page"`, `aria-describedby` для кнопок Launch, `aria-pressed`, `aria-keyshortcuts` |
+| `picture` + `srcset` | ключове зображення — скріншот-превʼю робочої області в `tool.html`, через партіал `picture.ejs`: webp + jpg запасний варіант, `srcset`/`sizes`, **art direction** (окремий мобільний кадр для `max-width: 767px`), `width`/`height` проти CLS, `loading="lazy"` |
+| `alt` і `aria-label` | змістовний `alt` у скріншота (перекладається через `data-i18n-attr`); `aria-label`/`aria-labelledby` для навігацій і кнопок, `aria-current="page"`, `aria-describedby` для кнопок Launch, `aria-pressed`, `aria-keyshortcuts` |
 | Навігація відносними посиланнями | `./index.html`, `./tools.html`, `./tool.html?tool=…`, `./about.html`; зображення `images/…`; Vite `base: './'` — сайт працює і з підпапки GitHub Pages. Скрипт `scripts/check-dist.js` перевіряє, що **всі** відносні посилання й `srcset` ведуть на існуючі файли |
 
 ### Додаткова частина (до 10 балів)
@@ -73,7 +73,8 @@ scripts/                # перевірки збірки + генерація �
 ### Доступність (додаткові бали)
 
 Skip-link, один `h1` на сторінку і послідовні рівні заголовків, `label` для кожного поля,
-Quick Find відкривається через Popover API (`popovertarget`) — працює з клавіатури без жодного JS.
+Quick Find — це елемент `<dialog>` з атрибутом `popover`: відкривається кнопкою в шапці (`popovertarget`),
+закривається кнопкою Close (`popovertargetaction="hide"`) або клавішею Esc — працює з клавіатури без жодного JS.
 
 ### Автоматичні перевірки (`npm run build`)
 
