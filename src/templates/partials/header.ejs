@@ -28,7 +28,7 @@
     </a>
   </div>
 
-  <div class="dt-quick-find" id="quick-find" popover role="dialog" aria-labelledby="quick-find-title">
+  <dialog class="dt-quick-find" id="quick-find" popover aria-labelledby="quick-find-title">
     <h2 class="dt-quick-find__title" id="quick-find-title" data-i18n="header.quickFindTitle"><%= t("header.quickFindTitle") %></h2>
     <form class="dt-quick-find__form" role="search" action="./tools.html" method="get">
       <label class="dt-quick-find__label" for="quick-find-input" data-i18n="header.quickFindLabel"><%= t("header.quickFindLabel") %></label>
@@ -36,5 +36,5 @@
       <button class="dt-button dt-button--accent" type="submit" data-i18n="common.search"><%= t("common.search") %></button>
     </form>
     <button class="dt-button dt-button--ghost" type="button" popovertarget="quick-find" popovertargetaction="hide" data-i18n="common.close"><%= t("common.close") %></button>
-  </div>
+  </dialog>
 </header>
