@@ -1,0 +1,21 @@
+@use "../abstracts" as *;
+
+.dt-fact {
+  @include flex(column, flex-start, flex-start, rem(2px));
+
+  font-family: $font-mono;
+
+  dt {
+    @include text-style(11px, 1.4, 600);
+
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  dd {
+    @include text-style(13px, 1.5, 500);
+
+    color: $color-text;
+  }
+}

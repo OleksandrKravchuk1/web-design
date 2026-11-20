@@ -1,6 +1,24 @@
-// _functions.scss
 @use "sass:math";
+@use "sass:map";
+@use "sass:color";
+@use "variables" as *;
 
-@function rem($px, $base: 16) {
-  @return math.div($px, $base) * 1rem;
+@function rem($px) {
+  @return math.div($px, 16px) * 1rem;
+}
+
+@function space($key) {
+  @return rem(map.get($space, $key));
+}
+
+@function tint($c, $amount) {
+  @return color.mix(white, $c, $amount);
+}
+
+@function shade($c, $amount) {
+  @return color.mix(black, $c, $amount);
+}
+
+@function alpha($c, $opacity) {
+  @return color.change($c, $alpha: $opacity);
 }

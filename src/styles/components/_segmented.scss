@@ -1,0 +1,40 @@
+@use "../abstracts" as *;
+
+.dt-segmented {
+  display: inline-flex;
+  padding: rem(2px);
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  background: $color-bg;
+
+  &__legend {
+    @include visually-hidden;
+  }
+
+  &__option {
+    @include text-style(12px, 1.4, 500);
+
+    padding: space(1) space(2);
+    border-radius: 4px;
+    color: $color-text-muted;
+    font-family: $font-mono;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-text;
+    }
+
+    &:has(:checked) {
+      background: $color-surface-alt;
+      color: $color-accent;
+    }
+
+    &:has(:focus-visible) {
+      outline: 2px solid $color-accent;
+    }
+  }
+
+  &__option input {
+    @include visually-hidden;
+  }
+}

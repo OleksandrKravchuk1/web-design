@@ -1,0 +1,18 @@
+@use "../abstracts" as *;
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: rem(16px);
+  height: rem(16px);
+  margin: 0;
+  accent-color: $color-accent;
+  cursor: pointer;
+}
+
+select {
+  cursor: pointer;
+}
+
+textarea {
+  resize: vertical;
+}

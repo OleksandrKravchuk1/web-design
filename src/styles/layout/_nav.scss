@@ -1,0 +1,41 @@
+@use "../abstracts" as *;
+
+.dt-nav {
+  order: 3;
+  width: 100%;
+  overflow-x: auto;
+
+  @include media-up(lg) {
+    order: 0;
+    width: auto;
+    margin-right: auto;
+  }
+
+  &__list {
+    @include flex(row, flex-start, center, space(1));
+  }
+
+  &__link {
+    @include text-style(14px, 1.4, 500);
+    @include focus-ring;
+    @include transition(color, background-color);
+
+    display: block;
+    padding: space(2) space(3);
+    border: 1px solid transparent;
+    border-radius: $radius;
+    color: $color-text-muted;
+    white-space: nowrap;
+
+    &:hover {
+      background: $color-surface;
+      color: $color-text;
+    }
+  }
+
+  &__link[aria-current="page"] {
+    border-color: $color-accent;
+    background: $color-surface-alt;
+    color: $color-accent;
+  }
+}

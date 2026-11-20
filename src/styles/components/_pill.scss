@@ -1,0 +1,39 @@
+@use "../abstracts" as *;
+
+.dt-pill {
+  @include flex(row, center, center, space(1));
+  @include text-style(11px, 1, 500);
+  @include focus-ring;
+  @include transition(border-color, color);
+
+  display: inline-flex;
+  min-height: rem(24px);
+  padding: space(1) rem(10px);
+  border: 1px solid $color-border;
+  border-radius: $radius-pill;
+  background: $color-surface;
+  color: $color-text-muted;
+  font-family: $font-mono;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+
+  &[href]:hover {
+    border-color: $color-accent;
+    color: $color-accent;
+  }
+
+  &--active {
+    border-color: $color-accent;
+    background: $color-surface-alt;
+    color: $color-accent;
+
+    &::before {
+      content: "";
+      width: rem(4px);
+      height: rem(4px);
+      border-radius: 50%;
+      background: currentcolor;
+    }
+  }
+}

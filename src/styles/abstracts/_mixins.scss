@@ -1,21 +1,127 @@
-// _mixins.scss
-@mixin container($max: 1200px) {
+@use "sass:map";
+@use "sass:math";
+@use "variables" as *;
+@use "functions" as *;
+
+@mixin media-up($bp) {
+  $value: map.get($breakpoints, $bp);
+
+  @if not $value {
+    @error "Unknown breakpoint: #{$bp}";
+  }
+
+  @media (min-width: $value) {
+    @content;
+  }
+}
+
+@mixin container($max: $container-max) {
   width: 100%;
   max-width: $max;
   margin-inline: auto;
-  padding-inline: 16px;
+  padding-inline: rem($gutter-sm);
+
+  @include media-up(md) {
+    padding-inline: rem($gutter-md);
+  }
 }
 
-@mixin flex-center($gap: 8px) {
+@mixin flex($dir: row, $justify: flex-start, $align: stretch, $gap: 0) {
   display: flex;
-  align-items: center;
+  flex-direction: $dir;
+  justify-content: $justify;
+  align-items: $align;
   gap: $gap;
 }
 
-@mixin respond($breakpoint) {
-  @if $breakpoint == md {
-    @media (min-width: 768px) { @content; }
-  } @else if $breakpoint == lg {
-    @media (min-width: 1280px) { @content; }
+@mixin text-style($size, $lh: 1.5, $weight: 400) {
+  font-size: rem($size);
+  font-weight: $weight;
+  line-height: $lh;
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 2px;
   }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin field {
+  @include text-style(14px, 1.4);
+  @include focus-ring;
+  @include transition(border-color);
+
+  min-height: rem(40px);
+  padding: space(2) space(3);
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  background: $color-bg;
+  color: $color-text;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: $color-accent;
+  }
+}
+
+@mixin card($bg: $color-surface) {
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  background: $bg;
+}
+
+@mixin eyebrow($color: $color-accent) {
+  @include text-style(11px, 1.4, 600);
+
+  color: $color;
+  font-family: $font-mono;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+@mixin lead {
+  @include text-style(14px, 1.5);
+
+  max-width: 65ch;
+  color: $color-text-muted;
+
+  @include media-up(md) {
+    @include text-style(16px, 1.5);
+  }
+}
+
+@mixin transition($props...) {
+  transition-duration: map.get($duration, base);
+  transition-property: $props;
+  transition-timing-function: $easing;
+}
+
+@mixin row($gutter: $gutter-md) {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: rem($gutter);
+  margin-inline: rem(math.div(-$gutter, 2));
+}
+
+@mixin col($span, $total: 12, $gutter: $gutter-md) {
+  flex: 0 0 math.percentage(math.div($span, $total));
+  max-width: math.percentage(math.div($span, $total));
+  padding-inline: rem(math.div($gutter, 2));
 }

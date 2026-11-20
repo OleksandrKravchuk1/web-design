@@ -1,0 +1,84 @@
+@use "../abstracts" as *;
+
+.dt-tool-card {
+  @include flex(column, flex-start, stretch, space(3));
+  @include card;
+  @include transition(border-color, transform);
+
+  width: 100%;
+  padding: space(4);
+
+  &:hover {
+    border-color: $color-accent-alt;
+    transform: translateY(-2px);
+  }
+
+  &--highlight {
+    border-color: shade($color-accent, 40%);
+  }
+
+  &__category {
+    display: flex;
+  }
+
+  &__title {
+    @include text-style(18px, 1.33, 600);
+  }
+
+  &__description {
+    @include text-style(14px, 1.45);
+
+    color: $color-text-muted;
+  }
+
+  &__tags {
+    @include flex(row, flex-start, center, space(1));
+
+    flex-wrap: wrap;
+  }
+
+  &__tag {
+    @include text-style(11px, 1.4, 500);
+
+    padding: rem(2px) space(2);
+    border-radius: 4px;
+    background: $color-bg;
+    color: $color-text-muted;
+    font-family: $font-mono;
+  }
+
+  &__tag--trait {
+    margin-left: auto;
+    background: transparent;
+  }
+
+  &__footer {
+    @include flex(row, space-between, center, space(3));
+
+    margin-top: auto;
+    padding-top: space(3);
+    border-top: 1px solid $color-border;
+  }
+
+  &__status {
+    @include flex(row, flex-start, center, space(2));
+    @include text-style(12px, 1.4, 600);
+
+    color: $color-success;
+    font-family: $font-mono;
+
+    &::before {
+      content: "";
+      width: rem(6px);
+      height: rem(6px);
+      border-radius: 50%;
+      background: currentcolor;
+    }
+  }
+
+  &__note {
+    @include text-style(14px, 1.4);
+
+    color: $color-text-muted;
+  }
+}

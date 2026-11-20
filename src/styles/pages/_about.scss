@@ -1,0 +1,171 @@
+@use "../abstracts" as *;
+
+.dt-about-hero {
+  @include flex(column, flex-start, flex-start, space(4));
+
+  padding-top: space(4);
+
+  &__eyebrow {
+    @include eyebrow;
+
+    padding: space(1) space(3);
+    border: 1px solid alpha($color-accent, 0.3);
+    border-radius: $radius-pill;
+    background: alpha($color-accent, 0.08);
+  }
+
+  &__title {
+    max-width: 22ch;
+  }
+
+  &__lead {
+    @include lead;
+  }
+
+  &__tags {
+    @include flex(row, flex-start, center, space(2));
+
+    flex-wrap: wrap;
+  }
+}
+
+.dt-principles {
+  display: grid;
+  gap: space(4);
+
+  @include media-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.dt-principle {
+  @include flex(column, flex-start, flex-start, space(3));
+  @include card;
+
+  padding: space(6);
+
+  &__tag {
+    @include text-style(11px, 1.4, 600);
+
+    padding: rem(2px) space(2);
+    border-radius: 4px;
+    background: alpha($color-success, 0.1);
+    color: $color-success;
+    font-family: $font-mono;
+  }
+
+  &__title {
+    @include text-style(18px, 1.33, 600);
+  }
+
+  &__text {
+    @include text-style(14px, 1.6);
+
+    color: $color-text-muted;
+  }
+
+  &__meta {
+    @include flex(row, space-between, center, space(3));
+    @include text-style(12px, 1.4, 500);
+
+    width: 100%;
+    margin-top: auto;
+    padding-top: space(3);
+    border-top: 1px solid $color-border;
+    font-family: $font-mono;
+
+    dt {
+      color: $color-text-muted;
+    }
+  }
+}
+
+.dt-architecture {
+  @include card;
+
+  display: grid;
+  gap: space(3);
+  padding: space(6) space(4);
+
+  @include media-up(md) {
+    padding: space(10);
+  }
+
+  @include media-up(lg) {
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: repeat(5, auto) 1fr;
+    column-gap: space(10);
+  }
+
+  &__eyebrow {
+    @include eyebrow;
+  }
+
+  &__lead {
+    @include lead;
+  }
+
+  &__stack {
+    @include flex(row, flex-start, center, space(2));
+
+    flex-wrap: wrap;
+  }
+
+  &__sandbox {
+    @include flex(row, flex-start, center, space(2) space(3));
+    @include text-style(12px, 1.4, 500);
+
+    flex-wrap: wrap;
+    padding: space(3);
+    border-radius: $radius;
+    background: $color-bg;
+    color: $color-text-muted;
+    font-family: $font-mono;
+
+    meter {
+      flex: 1 1 rem(160px);
+      height: rem(8px);
+    }
+  }
+}
+
+.dt-benchmarks {
+  @include card($color-bg);
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  @include media-up(lg) {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: start;
+  }
+
+  &__caption {
+    padding: space(3) space(4) space(2);
+  }
+
+  th,
+  td {
+    padding-inline: space(4);
+  }
+
+  small {
+    display: block;
+    color: $color-text-muted;
+    font-family: $font-mono;
+  }
+
+  td {
+    color: $color-accent;
+    font-family: $font-mono;
+    font-weight: 600;
+  }
+
+  tfoot td {
+    @include text-style(11px, 1.4, 500);
+
+    border-bottom: 0;
+    color: $color-text-muted;
+  }
+}

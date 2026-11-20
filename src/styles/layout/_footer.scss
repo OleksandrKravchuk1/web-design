@@ -1,4 +1,54 @@
-// _footer.scss
-@use "../abstracts/mixins" as *;
+@use "../abstracts" as *;
 
-.u-footer { @include container(); padding: 24px 0; border-top: 1px solid rgba(255,255,255,.1); margin-top: 40px; }
+.dt-footer {
+  @include flex(column, center, center, space(3));
+  @include text-style(12px, 1.5, 500);
+
+  padding: space(6) rem($gutter-sm);
+  border-top: 1px solid $color-border;
+  color: $color-text-muted;
+  font-family: $font-mono;
+  text-align: center;
+
+  @include media-up(md) {
+    padding-inline: rem($gutter-md);
+  }
+
+  @include media-up(lg) {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  &__status {
+    @include flex(row, center, center, space(4));
+
+    flex-wrap: wrap;
+
+    &::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $color-success;
+    }
+  }
+
+  &__lang-list {
+    @include flex(row, center, center, space(1));
+  }
+
+  &__lang-link {
+    @include focus-ring;
+
+    display: block;
+    padding: space(1) space(3);
+    border: 1px solid $color-border;
+    border-radius: $radius-pill;
+
+    &:hover {
+      border-color: $color-accent;
+      color: $color-accent;
+    }
+  }
+}

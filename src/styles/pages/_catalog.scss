@@ -1,0 +1,80 @@
+@use "../abstracts" as *;
+
+.dt-catalog-header {
+  @include flex(row, flex-start, center, space(3) space(4));
+
+  flex-wrap: wrap;
+
+  &__version {
+    @include text-style(12px, 1.4, 600);
+
+    padding: rem(2px) space(3);
+    border: 1px solid alpha($color-success, 0.3);
+    border-radius: $radius-pill;
+    background: alpha($color-success, 0.08);
+    color: $color-success;
+    font-family: $font-mono;
+  }
+
+  &__title {
+    flex-basis: 100%;
+  }
+
+  &__lead {
+    @include lead;
+
+    flex-basis: 100%;
+
+    @include media-up(lg) {
+      flex: 1 1 0;
+    }
+  }
+
+  &__facts {
+    @include flex(row, flex-start, center, space(6));
+    @include card;
+
+    flex-wrap: wrap;
+    padding: space(3) space(4);
+
+    @include media-up(lg) {
+      margin-left: auto;
+    }
+  }
+}
+
+.dt-catalog-toolbar {
+  @include flex(row, space-between, center, space(3));
+
+  flex-wrap: wrap;
+  margin-bottom: calc(-1 * #{space(4)});
+
+  &__count {
+    @include text-style(13px, 1.4, 500);
+
+    color: $color-text-muted;
+    font-family: $font-mono;
+  }
+}
+
+.dt-empty {
+  @include flex(column, center, center, space(3));
+
+  padding: space(10) space(4);
+  border: 1px dashed $color-border;
+  border-radius: $radius;
+  text-align: center;
+
+  &__text {
+    color: $color-text-muted;
+  }
+}
+
+.dt-catalog-note {
+  @include text-style(12px, 1.5, 500);
+
+  margin-top: calc(-1 * #{space(4)});
+  color: $color-text-muted;
+  font-family: $font-mono;
+  text-align: center;
+}

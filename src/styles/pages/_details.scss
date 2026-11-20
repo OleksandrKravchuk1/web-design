@@ -1,0 +1,224 @@
+@use "../abstracts" as *;
+
+.dt-tool {
+  @include flex(column, flex-start, stretch, space(8));
+
+  &__header {
+    @include flex(row, flex-start, center, space(3) space(4));
+
+    flex-wrap: wrap;
+  }
+
+  &__header .dt-breadcrumbs {
+    flex-basis: 100%;
+  }
+
+  &__status {
+    @include text-style(12px, 1.4, 600);
+
+    padding: rem(2px) space(3);
+    border: 1px solid alpha($color-success, 0.3);
+    border-radius: $radius-pill;
+    background: alpha($color-success, 0.08);
+    color: $color-success;
+    font-family: $font-mono;
+  }
+
+  &__lead {
+    @include lead;
+
+    flex-basis: 100%;
+
+    @include media-up(lg) {
+      flex: 1 1 60%;
+    }
+  }
+
+  &__facts {
+    @include flex(row, flex-start, center, space(6));
+    @include card;
+
+    flex-wrap: wrap;
+    padding: space(3) space(4);
+  }
+
+  &__preview {
+    @include flex(column, flex-start, stretch, space(2));
+  }
+
+  &__preview-image {
+    width: 100%;
+    aspect-ratio: 760 / 730;
+    object-fit: cover;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+
+    @include media-up(md) {
+      aspect-ratio: 1600 / 830;
+    }
+  }
+
+  &__caption {
+    @include text-style(12px, 1.5);
+
+    color: $color-text-muted;
+    text-align: center;
+  }
+
+  &__side {
+    display: grid;
+    gap: space(4);
+
+    @include media-up(lg) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: space(6);
+    }
+  }
+}
+
+.dt-workspace {
+  @include flex(column, flex-start, stretch, space(4));
+
+  &__toolbar {
+    @include flex(row, flex-start, center, space(2));
+    @include card;
+
+    flex-wrap: wrap;
+    padding: space(2);
+  }
+
+  &__panes {
+    display: grid;
+    gap: space(4);
+
+    @include media-up(lg) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: space(6);
+    }
+  }
+}
+
+.dt-pane {
+  @include flex(column, flex-start, stretch, 0);
+  @include card;
+
+  min-width: 0;
+  overflow: hidden;
+
+  &__header {
+    @include flex(row, flex-start, center, space(2) space(3));
+
+    flex-wrap: wrap;
+    padding: space(3) space(4);
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__title {
+    @include text-style(16px, 1.4, 600);
+  }
+
+  &__meta {
+    @include text-style(12px, 1.4, 500);
+
+    padding: rem(2px) space(2);
+    border-radius: 4px;
+    background: $color-bg;
+    color: $color-text-muted;
+    font-family: $font-mono;
+  }
+
+  &__actions {
+    @include flex(row, flex-start, center, space(1));
+
+    flex-wrap: wrap;
+
+    @include media-up(md) {
+      margin-left: auto;
+    }
+  }
+
+  &__file {
+    @include visually-hidden;
+  }
+
+  &__editor,
+  &__code {
+    @include text-style(13px, 1.55);
+
+    flex: 1;
+    width: 100%;
+    min-height: rem(320px);
+    margin: 0;
+    padding: space(4);
+    border: 0;
+    background: $color-bg;
+    color: $color-text;
+    font-family: $font-mono;
+    white-space: pre;
+    overflow: auto;
+
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: -2px;
+    }
+  }
+
+  &__footer {
+    @include flex(row, space-between, center, space(3));
+    @include text-style(12px, 1.4, 500);
+
+    flex-wrap: wrap;
+    padding: space(2) space(4);
+    border-top: 1px solid $color-border;
+    color: $color-text-muted;
+    font-family: $font-mono;
+  }
+
+  &__status {
+    color: $color-success;
+  }
+}
+
+.dt-shortcuts {
+  font-size: rem(13px);
+
+  thead {
+    @include visually-hidden;
+  }
+
+  td {
+    text-align: right;
+    white-space: nowrap;
+  }
+}
+
+.dt-snippets,
+.dt-related {
+  @include flex(column, flex-start, stretch, space(3));
+
+  &__lead {
+    @include lead;
+
+    margin-bottom: space(2);
+  }
+}
+
+.dt-snippet {
+  @include flex(column, flex-start, stretch, space(2));
+
+  &__title {
+    @include text-style(13px, 1.4, 600);
+
+    color: $color-text-muted;
+    font-family: $font-mono;
+  }
+
+  &__code {
+    @include card($color-bg);
+    @include text-style(13px, 1.55);
+    @include focus-ring;
+
+    padding: space(4);
+    overflow-x: auto;
+  }
+}

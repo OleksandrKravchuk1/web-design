@@ -1,0 +1,14 @@
+@use "../abstracts" as *;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background: $color-bg;
+  color: $color-text;
+}
+
+::selection {
+  background: rgba($color-accent, 0.3);
+}

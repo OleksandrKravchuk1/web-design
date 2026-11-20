@@ -1,14 +1,52 @@
-// _variables.scss
-$u-space-1: 4px;
-$u-space-2: 8px;
-$u-space-3: 12px;
-$u-space-4: 16px;
-$u-space-5: 24px;
+// Кольори
+$color-bg: #0b0f19;
+$color-surface: #111827;
+$color-surface-alt: #1f2937;
+$color-border: #374151;
+$color-text: #f9fafb;
+$color-text-muted: #9ca3af;
+$color-accent: #38bdf8;
+$color-accent-alt: #6366f1;
+$color-success: #10b981;
+$color-warning: #f59e0b;
+$color-error: #ef4444;
 
-$u-font-base: 16px;
-$u-font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+// Шрифти
+$font-sans: "Inter Variable", system-ui, sans-serif;
+$font-mono: "JetBrains Mono Variable", monospace;
 
-$u-color-bg: #0f172a;
-$u-color-text: #e2e8f0;
-$u-color-accent: #38bdf8;
-$u-color-muted: #94a3b8;
+// Брейкпоінти
+$breakpoints: (
+  sm: 360px,
+  md: 768px,
+  lg: 1280px,
+);
+
+// Сітка
+$container-max: 1440px;
+$gutter-sm: 16px;
+$gutter-md: 24px;
+
+// Відступи
+$space: (
+  0: 0,
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
+  6: 24px,
+  8: 32px,
+  10: 40px,
+);
+
+// Заокруглення
+$radius: 6px;
+$radius-pill: 999px;
+
+// Анімації
+$duration: (
+  fast: 120ms,
+  base: 200ms,
+  slow: 320ms,
+);
+$easing: cubic-bezier(0.2, 0, 0, 1);

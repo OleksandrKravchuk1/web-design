@@ -1,4 +1,19 @@
-// _grid.scss
-@use "../abstracts/mixins" as *;
+@use "../abstracts" as *;
 
-.container { @include container(); }
+.dt-grid {
+  @include row;
+
+  &__item {
+    @include col(12);
+
+    display: flex;
+
+    @include media-up(md) {
+      @include col(6);
+    }
+
+    @include media-up(lg) {
+      @include col(4);
+    }
+  }
+}

@@ -1,0 +1,42 @@
+@use "../abstracts" as *;
+
+.dt-pagination {
+  &__list {
+    @include flex(row, center, center, space(1));
+
+    flex-wrap: wrap;
+  }
+
+  &__link {
+    @include flex(row, center, center);
+    @include text-style(13px, 1, 600);
+    @include focus-ring;
+
+    min-width: rem(36px);
+    height: rem(36px);
+    padding-inline: space(3);
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    background: $color-surface;
+    color: $color-text;
+    font-family: $font-mono;
+
+    &:hover {
+      border-color: $color-accent;
+      color: $color-accent;
+    }
+  }
+
+  &__link[aria-current="page"] {
+    border-color: $color-accent;
+    background: $color-accent;
+    color: $color-bg;
+  }
+
+  &__link--disabled {
+    border-color: transparent;
+    background: transparent;
+    color: $color-text-muted;
+    pointer-events: none;
+  }
+}
