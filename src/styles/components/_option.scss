@@ -1,0 +1,15 @@
+@use "../abstracts" as *;
+
+.dt-option {
+  @include flex(row-reverse, space-between, center, space(3));
+  @include text-style(14px, 1.4);
+
+  padding: space(3);
+  border-radius: $radius;
+  background: $color-surface-alt;
+  cursor: pointer;
+
+  &:hover {
+    background: tint($color-surface-alt, 5%);
+  }
+}

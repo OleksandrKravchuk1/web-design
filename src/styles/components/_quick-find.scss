@@ -1,0 +1,38 @@
+@use "../abstracts" as *;
+
+.dt-quick-find {
+  @include card($color-surface-alt);
+
+  width: min(rem(560px), calc(100% - #{space(8)}));
+  margin: 15vh auto auto;
+  padding: space(6);
+  color: $color-text;
+  box-shadow: 0 20px 25px -5px alpha($color-bg, 0.6);
+
+  &::backdrop {
+    background: alpha($color-bg, 0.75);
+  }
+
+  &__title {
+    @include text-style(18px, 1.33, 600);
+
+    margin-bottom: space(4);
+  }
+
+  &__form {
+    @include flex(row, flex-start, stretch, space(2));
+
+    margin-bottom: space(3);
+  }
+
+  &__label {
+    @include visually-hidden;
+  }
+
+  &__input {
+    @include field;
+
+    flex: 1;
+    min-width: 0;
+  }
+}

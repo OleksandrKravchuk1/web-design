@@ -1,0 +1,77 @@
+@use "../abstracts" as *;
+
+.dt-cta {
+  @include card;
+
+  display: grid;
+  gap: space(3);
+  padding: space(6) space(4);
+  background:
+    radial-gradient(circle at 100% 0%, alpha($color-accent, 0.12), transparent 60%),
+    $color-surface;
+
+  @include media-up(md) {
+    padding: space(10);
+  }
+
+  @include media-up(lg) {
+    grid-template-columns: 1fr auto;
+    column-gap: space(10);
+  }
+
+  &--github {
+    background:
+      radial-gradient(circle at 0% 100%, alpha($color-accent-alt, 0.3), transparent 60%),
+      $color-surface;
+  }
+
+  &__eyebrow {
+    @include eyebrow($color-success);
+
+    overflow-wrap: anywhere;
+
+    code {
+      text-transform: none;
+    }
+  }
+
+  &__title {
+    @include text-style(22px, 1.25, 700);
+
+    @include media-up(md) {
+      @include text-style(28px, 1.2, 700);
+    }
+  }
+
+  &__text {
+    @include lead;
+  }
+
+  &__points {
+    @include flex(row, flex-start, center, space(2) space(4));
+    @include text-style(12px, 1.4, 500);
+
+    flex-wrap: wrap;
+    color: $color-text-muted;
+    font-family: $font-mono;
+
+    li::before {
+      content: "✓ ";
+      color: $color-success;
+    }
+  }
+
+  &__actions {
+    @include flex(row, flex-start, center, space(3));
+
+    flex-wrap: wrap;
+    margin-top: space(2);
+
+    @include media-up(lg) {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      align-self: center;
+      margin-top: 0;
+    }
+  }
+}

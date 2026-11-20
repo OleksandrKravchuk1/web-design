@@ -57,6 +57,14 @@
     }
   }
 
+  &__quick-find {
+    padding-inline: space(2);
+
+    @include media-up(md) {
+      padding-inline: space(4);
+    }
+  }
+
   &__quick-find kbd {
     display: none;
 

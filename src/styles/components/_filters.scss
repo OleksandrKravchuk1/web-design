@@ -1,0 +1,81 @@
+@use "../abstracts" as *;
+
+.dt-filters {
+  @include flex(column, flex-start, stretch, space(4));
+
+  @include media-up(md) {
+    flex-flow: row wrap;
+    align-items: flex-end;
+  }
+
+  &__field {
+    @include flex(column, flex-start, stretch, space(1));
+  }
+
+  &__field:first-child {
+    @include media-up(md) {
+      flex: 1 1 100%;
+    }
+
+    @include media-up(lg) {
+      flex-basis: rem(320px);
+    }
+  }
+
+  &__label,
+  &__legend {
+    @include text-style(11px, 1.4, 600);
+
+    color: $color-text-muted;
+    font-family: $font-mono;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  &__legend {
+    margin-bottom: space(2);
+  }
+
+  &__input,
+  &__select {
+    @include field;
+  }
+
+  &__group {
+    @include flex(row, flex-start, center, space(2));
+
+    flex-wrap: wrap;
+
+    @include media-up(md) {
+      flex-basis: 100%;
+    }
+
+    @include media-up(lg) {
+      order: 1;
+    }
+  }
+
+  &__option {
+    @include flex(row, flex-start, center, space(2));
+    @include text-style(12px, 1.4, 500);
+
+    min-height: rem(32px);
+    padding: space(1) space(3);
+    border: 1px solid $color-border;
+    border-radius: $radius-pill;
+    background: $color-surface;
+    color: $color-text-muted;
+    font-family: $font-mono;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      border-color: $color-accent;
+    }
+
+    &:has(:checked) {
+      border-color: $color-accent;
+      color: $color-accent;
+    }
+  }
+}

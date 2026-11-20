@@ -1,0 +1,136 @@
+@use "../abstracts" as *;
+
+.dt-hero {
+  @include flex(column, flex-start, center, space(4));
+
+  padding: space(8) space(4);
+  border-radius: $radius;
+  background: radial-gradient(ellipse at 50% 0%, alpha($color-accent, 0.14), transparent 70%);
+  text-align: center;
+
+  @include media-up(md) {
+    padding: space(10) space(6);
+  }
+
+  &__eyebrow {
+    @include eyebrow;
+    @include flex(row, center, center, space(1));
+
+    padding: space(1) space(3);
+    border: 1px solid alpha($color-accent, 0.3);
+    border-radius: $radius-pill;
+    background: alpha($color-accent, 0.08);
+  }
+
+  &__title {
+    max-width: 20ch;
+  }
+
+  &__accent {
+    display: block;
+    background: linear-gradient(135deg, $color-accent-alt, $color-accent);
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__lead {
+    @include lead;
+  }
+
+  &__actions {
+    @include flex(row, center, center, space(3));
+
+    flex-wrap: wrap;
+  }
+}
+
+.dt-quick-access {
+  @include flex(row, center, center, space(2));
+
+  flex-wrap: wrap;
+
+  &__label {
+    @include text-style(12px, 1.4);
+
+    color: $color-text-muted;
+    font-family: $font-mono;
+  }
+
+  &__list {
+    @include flex(row, center, center, space(2));
+
+    flex-wrap: wrap;
+  }
+}
+
+.dt-stats__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: space(3);
+
+  @include media-up(lg) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: space(4);
+  }
+}
+
+.dt-stat {
+  @include flex(column, flex-start, flex-start, space(1));
+  @include card;
+
+  padding: space(4);
+
+  &__label {
+    @include eyebrow($color-text-muted);
+  }
+
+  &__value {
+    @include text-style(15px, 1.5, 600);
+
+    font-family: $font-mono;
+  }
+
+  &__note {
+    @include text-style(12px, 1.4);
+
+    color: $color-text-muted;
+  }
+}
+
+.dt-toolkit {
+  @include flex(column, flex-start, stretch, space(6));
+
+  &__header {
+    display: grid;
+    gap: space(2);
+
+    @include media-up(lg) {
+      grid-template-columns: 1fr auto;
+      column-gap: space(8);
+    }
+  }
+
+  &__eyebrow {
+    @include eyebrow;
+  }
+
+  &__lead {
+    @include lead;
+  }
+}
+
+.dt-filter {
+  margin-top: space(2);
+
+  @include media-up(lg) {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: end;
+  }
+
+  &__list {
+    @include flex(row, flex-start, center, space(2));
+
+    flex-wrap: wrap;
+  }
+}

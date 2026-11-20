@@ -1,0 +1,67 @@
+@use "../abstracts" as *;
+
+.dt-panel {
+  @include flex(column, flex-start, stretch, space(4));
+  @include card;
+
+  padding: space(4);
+
+  @include media-up(md) {
+    padding: space(6);
+  }
+
+  &__title {
+    @include text-style(18px, 1.33, 600);
+  }
+
+  &__lead {
+    @include text-style(14px, 1.5);
+
+    color: $color-text-muted;
+  }
+
+  &__options {
+    @include flex(column, flex-start, stretch, space(2));
+  }
+
+  &__legend {
+    @include eyebrow($color-text-muted);
+
+    margin-bottom: space(2);
+  }
+
+  &__steps {
+    @include flex(column, flex-start, stretch, space(2));
+    @include text-style(14px, 1.5);
+
+    padding-left: space(8);
+    list-style: decimal-leading-zero;
+    color: $color-text-muted;
+
+    li::marker {
+      color: $color-accent;
+      font-family: $font-mono;
+    }
+  }
+
+  &__meta {
+    @include flex(column, flex-start, stretch, space(2));
+
+    padding: space(3);
+    border-radius: $radius;
+    background: $color-bg;
+  }
+
+  &__meta .dt-fact {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: space(3);
+  }
+
+  &__note {
+    @include text-style(14px, 1.4, 500);
+
+    margin-top: auto;
+    color: $color-success;
+  }
+}

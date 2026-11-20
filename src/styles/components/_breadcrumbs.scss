@@ -1,0 +1,35 @@
+@use "../abstracts" as *;
+
+.dt-breadcrumbs {
+  @include text-style(12px, 1.5, 500);
+
+  font-family: $font-mono;
+
+  &__list {
+    @include flex(row, flex-start, center, space(2));
+
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    @include flex(row, flex-start, center, space(2));
+
+    color: $color-text-muted;
+  }
+
+  &__item + &__item::before {
+    content: "/";
+  }
+
+  &__link {
+    @include focus-ring;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  &__current {
+    color: $color-text;
+  }
+}

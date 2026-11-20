@@ -1,0 +1,19 @@
+@use "../abstracts" as *;
+
+.dt-search {
+  @include flex(row, flex-start, stretch, space(2));
+
+  width: 100%;
+  max-width: rem(640px);
+
+  &__label {
+    @include visually-hidden;
+  }
+
+  &__input {
+    @include field;
+
+    flex: 1;
+    min-width: 0;
+  }
+}

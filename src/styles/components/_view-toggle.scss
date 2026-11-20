@@ -1,0 +1,29 @@
+@use "../abstracts" as *;
+
+.dt-view-toggle {
+  display: inline-flex;
+  padding: rem(2px);
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  background: $color-surface;
+
+  &__button {
+    @include text-style(12px, 1.4, 500);
+    @include focus-ring;
+
+    padding: space(1) space(3);
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: $color-text-muted;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+
+  &__button[aria-pressed="true"] {
+    background: $color-surface-alt;
+    color: $color-accent;
+  }
+}

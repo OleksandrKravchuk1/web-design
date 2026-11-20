@@ -11,9 +11,12 @@
   text-align: center;
 
   @include media-up(md) {
+    padding-inline: rem($gutter-md);
+  }
+
+  @include media-up(lg) {
     flex-direction: row;
     justify-content: space-between;
-    padding-inline: rem($gutter-md);
     text-align: left;
   }
 

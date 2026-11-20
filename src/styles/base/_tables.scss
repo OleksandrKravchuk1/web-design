@@ -1,0 +1,25 @@
+@use "../abstracts" as *;
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+caption {
+  @include eyebrow($color-text-muted);
+
+  padding-bottom: space(3);
+  text-align: left;
+}
+
+th,
+td {
+  padding: space(3) space(2);
+  border-bottom: 1px solid $color-border;
+  text-align: left;
+  vertical-align: middle;
+}
+
+th {
+  font-weight: 500;
+}
