@@ -18,6 +18,7 @@
   &__link {
     @include text-style(14px, 1.4, 500);
     @include focus-ring;
+    @include transition(color, background-color);
 
     display: block;
     padding: space(2) space(3);
@@ -25,7 +26,6 @@
     border-radius: $radius;
     color: $color-text-muted;
     white-space: nowrap;
-    transition: color 0.2s, background-color 0.2s;
 
     &:hover {
       background: $color-surface;

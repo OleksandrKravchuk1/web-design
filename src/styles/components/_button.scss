@@ -4,6 +4,7 @@
   @include flex(row, center, center, space(2));
   @include text-style(14px, 1.2, 600);
   @include focus-ring;
+  @include transition(background-color, border-color, color, transform);
 
   display: inline-flex;
   min-height: rem(40px);
@@ -12,7 +13,6 @@
   border-radius: $radius;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 
   &:active {
     transform: translateY(1px);

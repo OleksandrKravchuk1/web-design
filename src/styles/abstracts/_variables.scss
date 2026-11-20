@@ -42,3 +42,11 @@ $space: (
 // Заокруглення
 $radius: 6px;
 $radius-pill: 999px;
+
+// Анімації
+$duration: (
+  fast: 120ms,
+  base: 200ms,
+  slow: 320ms,
+);
+$easing: cubic-bezier(0.2, 0, 0, 1);

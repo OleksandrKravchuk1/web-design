@@ -30,7 +30,7 @@ src/
   js/main.js            # ЛР2: лише i18n; ЛР4: каталог, фільтри, API
   js/core/i18n.js       # застосування data-i18n / data-i18n-attr
   js/api/               # axios + ендпоінти теми 7 (для ЛР4)
-  styles/               # SCSS 7-1 з шаблону — підключається в ЛР3
+  styles/               # SCSS, архітектура 7-1 (ЛР3)
 public/images/          # адаптивні зображення (webp + jpg, кілька ширин)
 api/db.json             # json-server; t7_tools / t7_categories / t7_snippets розширено під дизайн
 scripts/                # перевірки збірки + генерація зображень
@@ -77,7 +77,8 @@ Quick Find відкривається через Popover API (`popovertarget`) �
 
 ### Автоматичні перевірки (`npm run build`)
 
-1. ESLint (конфіг перенесено на flat config ESLint 9 — `.eslintrc.cjs` шаблону ESLint 9 більше не читає).
+1. ESLint (конфіг перенесено на flat config ESLint 9 — `.eslintrc.cjs` шаблону ESLint 9 більше не читає)
+   і stylelint для SCSS (з ЛР3).
 2. `scripts/check-src.js` — немає `style=` / `<style>`, словники EN/UK мають однакові ключі.
 3. `vite build`.
 4. `html-validate` (рекомендований набір правил) для всіх сторінок `dist/`.
@@ -85,7 +86,69 @@ Quick Find відкривається через Popover API (`popovertarget`) �
 
 ---
 
+## ЛР 3 — SCSS, адаптив, архітектура 7-1
+
+Дизайн із ЛР1 (`DESIGN.md` макета: темна палітра, Inter + JetBrains Mono) оформлено засобами SCSS.
+Стилі підключаються одним рядком у `src/js/main.js` (`import "../styles/main.scss"`), Vite компілює їх у CSS.
+
+### Структура стилів
+
+```
+src/styles/
+  main.scss        # лише @use, жодного правила
+  abstracts/       # нічого не виводить у CSS
+    _variables     #   кольори, шрифти, брейкпоінти, $space, радіуси, $duration / $easing
+    _functions     #   rem(), space(), tint(), shade(), alpha()
+    _mixins        #   media-up, container, flex, text-style, focus-ring, field, card,
+                   #   eyebrow, lead, visually-hidden, transition, row / col
+  vendors/         # @font-face для Inter і JetBrains Mono (npm @fontsource, латиниця + кирилиця)
+  themes/          # _default — темна тема (фон, колір тексту, color-scheme)
+  base/            # reset, typography, forms, tables, animations, utilities, print
+  components/      # button, pill, tool-card, search, filters, breadcrumbs, fact, view-toggle,
+                   # pagination, cta, panel, option, segmented, quick-find, faq
+  layout/          # main (контейнер), skip-link, header, nav, footer, grid
+  pages/           # home, catalog, details, about — лише секції однієї сторінки
+```
+
+Кожна папка має `_index.scss` з `@forward`; партіали підключають інструменти через `@use "../abstracts" as *`.
+Порядок у `main.scss`: vendors → abstracts → themes → base → components → layout → pages
+(layout стоїть після components, щоб шапка могла перевизначити кнопку в собі).
+
+### Обов'язкова частина (6 балів)
+
+| Вимога | Де виконано |
+| --- | --- |
+| 7-1, `@use` / `@forward`, без `@import` | усі 7 папок; `@import` заборонено правилом stylelint |
+| BEM, вкладеність ≤ 2 рівнів | класи `dt-block__element--modifier` з ЛР2; stylelint перевіряє шаблон імені й глибину селекторів |
+| Токени у змінних, без HEX у компонентах | `abstracts/_variables.scss`; у `components/`, `layout/`, `pages/` HEX, `rgb()` і назви кольорів заборонені stylelint |
+| ≥ 4 міксини, ≥ 2 функції | `media-up`, `container`, `flex`, `text-style` (+ ще 9); `rem`, `space`, `tint`, `shade`, `alpha` |
+| Mobile first, 360 / 768 / ≥ 1280 | базові стилі — для 360px, далі лише `min-width` через `media-up(md / lg)`; перевірено на 360, 768, 1280 без горизонтального скролу |
+| Responsive images | `<picture>` + webp + `srcset` з ЛР2; у CSS пропорції через `aspect-ratio` (760/730 на мобільному, 1600/830 від 768px — під art direction) |
+| `:focus-visible`, `prefers-reduced-motion` | міксин `focus-ring` на всіх інтерактивних елементах; reduced motion — у `base/_reset.scss` |
+
+### Додаткова частина (до 10 балів)
+
+- **Utility-класи** (`base/_utilities.scss`): `.mt-*`, `.mb-*`, `.p-*` генеруються циклом `@each` зі шкали `$space`;
+  `.is-hidden`, `.visually-hidden`, `.text-muted`, `.text-center`.
+- **Print** (`base/_print.scss`): без шапки, меню, фільтрів і кнопок, чорне на білому,
+  біля зовнішніх посилань друкується адреса, картки не розриваються між сторінками.
+- **Анімації**: `$duration` (fast / base / slow) + `$easing`, міксин `transition()`;
+  `@keyframes dt-fade-in` (відповідь FAQ) і `dt-slide-up` (Quick Find, клас `.is-appearing`);
+  картка піднімається при наведенні. Анімуються лише `opacity` і `transform`.
+
+### Бонус (до 12 балів) — власний грід
+
+Міксини `row($gutter)` і `col($span, $total: 12, $gutter)` (12 колонок, gutters через padding +
+від'ємний margin ряду). Використано в сітці карток `dt-grid`: `col(12)` → `col(6)` від 768px → `col(4)` від 1280px.
+
+### Доступність
+
+Контраст тексту за WCAG AA, видимий фокус, `visually-hidden` замість `display: none` для підписів полів
+(скрінрідер їх читає), стани беруться з ARIA-атрибутів: `aria-current="page"` (меню, пагінація),
+`aria-pressed` (вигляд каталогу), `:has(:checked)` для вибраних фільтрів — без JavaScript.
+
+---
+
 ## Наступні роботи
 
-- **ЛР3** — SCSS 7-1 у `src/styles`, міксини/функції, брейкпоінти 360–390 / 768 / ≥1280.
 - **ЛР4** — `src/js/api` + json-server `/topic7/*`: фільтри, пошук, сортування, пагінація, форми, localStorage.

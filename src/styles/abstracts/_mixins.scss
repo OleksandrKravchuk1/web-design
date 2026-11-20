@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:math";
 @use "variables" as *;
 @use "functions" as *;
 
@@ -61,6 +62,7 @@
 @mixin field {
   @include text-style(14px, 1.4);
   @include focus-ring;
+  @include transition(border-color);
 
   min-height: rem(40px);
   padding: space(2) space(3);
@@ -68,7 +70,6 @@
   border-radius: $radius;
   background: $color-bg;
   color: $color-text;
-  transition: border-color 0.2s;
 
   &::placeholder {
     color: $color-text-muted;
@@ -104,4 +105,23 @@
   @include media-up(md) {
     @include text-style(16px, 1.5);
   }
+}
+
+@mixin transition($props...) {
+  transition-duration: map.get($duration, base);
+  transition-property: $props;
+  transition-timing-function: $easing;
+}
+
+@mixin row($gutter: $gutter-md) {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: rem($gutter);
+  margin-inline: rem(math.div(-$gutter, 2));
+}
+
+@mixin col($span, $total: 12, $gutter: $gutter-md) {
+  flex: 0 0 math.percentage(math.div($span, $total));
+  max-width: math.percentage(math.div($span, $total));
+  padding-inline: rem(math.div($gutter, 2));
 }

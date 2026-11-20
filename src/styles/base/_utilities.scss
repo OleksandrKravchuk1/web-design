@@ -1,0 +1,31 @@
+@use "../abstracts" as *;
+
+@each $key, $value in $space {
+  .mt-#{$key} {
+    margin-top: rem($value) !important;
+  }
+
+  .mb-#{$key} {
+    margin-bottom: rem($value) !important;
+  }
+
+  .p-#{$key} {
+    padding: rem($value) !important;
+  }
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.text-muted {
+  color: $color-text-muted !important;
+}
+
+.text-center {
+  text-align: center !important;
+}

@@ -39,8 +39,7 @@ textarea {
   color: inherit;
 }
 
-ul[class],
-ol[class] {
+:where(ul[class], ol[class]) {
   margin: 0;
   padding: 0;
   list-style: none;

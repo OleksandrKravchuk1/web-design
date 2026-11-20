@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "../abstracts" as *;
 
 .dt-quick-find {
@@ -8,6 +9,10 @@
   padding: space(6);
   color: $color-text;
   box-shadow: 0 20px 25px -5px alpha($color-bg, 0.6);
+
+  &:popover-open {
+    animation: dt-slide-up map.get($duration, slow) $easing;
+  }
 
   &::backdrop {
     background: alpha($color-bg, 0.75);

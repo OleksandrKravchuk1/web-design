@@ -1,0 +1,34 @@
+@media print {
+  .dt-skip-link,
+  .dt-header,
+  .dt-footer,
+  .dt-filters,
+  .dt-catalog-toolbar,
+  .dt-pagination,
+  .dt-quick-find,
+  .dt-workspace__toolbar,
+  .dt-button {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+    font-size: 11pt;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+  }
+
+  .dt-tool-card,
+  .dt-panel,
+  .dt-principle,
+  .dt-snippet,
+  .dt-faq__item {
+    border-color: #999;
+    background: none;
+    break-inside: avoid;
+  }
+}

@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "../abstracts" as *;
 
 .dt-faq {
@@ -42,9 +43,10 @@
     }
 
     &::after {
+      @include transition(transform);
+
       content: "▾";
       color: $color-text-muted;
-      transition: transform 0.2s;
     }
   }
 
@@ -57,5 +59,6 @@
 
     padding: 0 space(4) space(4);
     color: $color-text-muted;
+    animation: dt-fade-in map.get($duration, base) $easing;
   }
 }

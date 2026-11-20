@@ -1,20 +1,19 @@
 @use "../abstracts" as *;
 
 .dt-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: space(4);
-
-  @include media-up(md) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: space(6);
-  }
-
-  @include media-up(lg) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  @include row;
 
   &__item {
+    @include col(12);
+
     display: flex;
+
+    @include media-up(md) {
+      @include col(6);
+    }
+
+    @include media-up(lg) {
+      @include col(4);
+    }
   }
 }

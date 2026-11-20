@@ -58,6 +58,7 @@
   &__option {
     @include flex(row, flex-start, center, space(2));
     @include text-style(12px, 1.4, 500);
+    @include transition(border-color, color);
 
     min-height: rem(32px);
     padding: space(1) space(3);
@@ -67,7 +68,6 @@
     color: $color-text-muted;
     font-family: $font-mono;
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
 
     &:hover {
       border-color: $color-accent;
